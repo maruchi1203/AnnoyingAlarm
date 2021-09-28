@@ -2,7 +2,6 @@
     <string name="app_name">Motivated</string>
 
     <string name="alarm_kr">알람</string>
-    <string name="alarm_en">Alarm</string>
     <string name="sunday_kr">일</string>
     <string name="monday_kr">월</string>
     <string name="tuesday_kr">화</string>
@@ -14,8 +13,6 @@
     <string name="alarm_mode_kr">알람 모드</string>
     <string name="alarm_setting_kr">알람 세팅</string>
     <string name="vibration_kr">진동 </string>
-    <string name="alarm_list_kr">당신을 위한 알람</string>
-    <string name="forMilitary_kr">군필 전용</string>
     <string name="comfirm_kr">확인</string>
     <string name="basic_kr">기본</string>
     <string name="save_kr">저장</string>

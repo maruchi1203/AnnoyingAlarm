@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'com.google.gms.google-services'
     id 'kotlin-kapt'
 }
 
@@ -10,7 +9,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "lowblow.motivated"
+        applicationId "lowblow.AnnoyingAlarm"
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
