@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/customTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="커스텀 알람"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/alarmSoundTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:text="알람음과 진동"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:drawableStartCompat="@drawable/ic_baseline_music_note_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/customTitleTextView" />
+
+    <LinearLayout
+        android:id="@+id/alarmSoundLinearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/alarmSoundTextView">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/alarmMusicChangeButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:ellipsize="end"
+            android:gravity="start|center"
+            android:maxLines="1"
+            android:paddingStart="16dp"
+            android:shadowColor="@color/black"
+            tools:ignore="RtlSymmetry"
+            tools:text="알람 소리" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/alarmPlayTestButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_play_arrow_24"
+            android:background="@color/transparent"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="12dp"/>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/alarmVibrationSwitchCompat"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="14dp"
+            android:thumb="@drawable/ic_baseline_vibration_24" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/alarmSoundControlTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="소리 크기"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:drawableStartCompat="@drawable/ic_baseline_music_note_24"
+        app:layout_constraintStart_toStartOf="@id/alarmSoundTextView"
+        app:layout_constraintTop_toBottomOf="@id/alarmSoundLinearLayout" />
+
+    <SeekBar
+        android:id="@+id/alarmSoundControlSeekBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        app:layout_constraintEnd_toEndOf="@id/alarmSoundLinearLayout"
+        app:layout_constraintStart_toStartOf="@id/alarmSoundLinearLayout"
+        app:layout_constraintTop_toBottomOf="@id/alarmSoundControlTextView" />
+
+    <LinearLayout
+        android:id="@+id/alarmGentleSoundLinearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/alarmSoundLinearLayout"
+        app:layout_constraintEnd_toEndOf="@id/alarmSoundLinearLayout"
+        app:layout_constraintTop_toBottomOf="@id/alarmSoundControlSeekBar"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/alarmGentleSoundTextView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="부드러운 알람"
+            android:gravity="start|center"
+            android:textColor="@color/black"
+            android:layout_weight="1"
+            android:paddingStart="16dp"
+            app:layout_constraintStart_toStartOf="@id/alarmSoundControlSeekBar"
+            app:layout_constraintTop_toBottomOf="@id/alarmSoundControlSeekBar"
+            tools:ignore="RtlSymmetry" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/alarmGentleSoundSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="14dp"/>
+        
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

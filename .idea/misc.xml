@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.14722222222222223" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable/background_thin_stroke.xml" value="0.1482638888888889" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable/button_selected.xml" value="0.221875" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable/button_unselected.xml" value="0.3764102564102564" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable/gradient_skyblue_to_indigoblue_down.xml" value="0.3764102564102564" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable/ic_baseline_access_alarms_24.xml" value="0.3764102564102564" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable/ic_baseline_access_alarms_36.xml" value="0.2548611111111111" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable/ic_baseline_access_alarms_48.xml" value="0.3764102564102564" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable/ic_baseline_add_28.xml" value="0.221875" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable/ic_baseline_add_alarm_24.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable/ic_baseline_alarm_24.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable/ic_baseline_alarm_on_128.xml" value="0.2548611111111111" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable/ic_baseline_alarm_on_200.xml" value="0.12777777777777777" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable/ic_baseline_calendar_today_24.xml" value="0.2548611111111111" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable/ic_baseline_library_music_24.xml" value="0.2548611111111111" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable/ic_baseline_man_24.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.2548611111111111" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable/ic_baseline_music_note_24.xml" value="0.2548611111111111" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable/ic_baseline_timer_24.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable/ic_baseline_vibration_24.xml" value="0.21481481481481482" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable/ic_baseline_vibration_cancel_24.xml" value="0.14722222222222223" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable/ic_baseline_wb_sunny_24.xml" value="0.14722222222222223" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable/ic_launcher_background.xml" value="0.14722222222222223" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable/ic_outline_music_note_24.xml" value="0.3764102564102564" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable/ic_round_music_note_24.xml" value="0.3764102564102564" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/layout-v28/fragment_alarm.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/layout/activity_choose_alarm_sound.xml" value="0.17152777777777778" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/layout/activity_main.xml" value="0.24409722222222222" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/layout/alarm_fragment/fragment_alarm.xml" value="0.3472222222222222" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/layout/alarm_setting.xml" value="0.24409722222222222" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/layout/alarm_setting_day_selector.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/layout/alarm_setting_time_picker.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/layout/alarm_wake_custom.xml" value="0.24375" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/layout/fragment_alarm.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/layout/fragment_capitalism.xml" value="0.24409722222222222" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/layout/fragment_custom.xml" value="0.22708333333333333" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/layout/fragment_massenger.xml" value="0.13645833333333332" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/layout/fragment_messenger.xml" value="0.24409722222222222" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/layout/fragment_military.xml" value="0.1" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/layout/fragment_mosquito.xml" value="0.22708333333333333" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/layout/fragment_option.xml" value="0.2046875" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/layout/fragment_planner.xml" value="0.2046875" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/layout/fragment_siren.xml" value="0.22708333333333333" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/layout/fragment_timer.xml" value="0.2046875" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/layout/item_alarm.xml" value="0.2415807560137457" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/layout/item_alarm_sound.xml" value="0.17152777777777778" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/layout/resource_capitalism.xml" value="0.13645833333333332" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.2046875" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/xml/option.xml" value="0.24409722222222222" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

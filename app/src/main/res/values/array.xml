@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="alarm_theme">
+        <item>커스텀 알람</item>
+        <item>공습 경보 알람</item>
+        <item>모기 습격 알람</item>
+        <item>O톡 메세지 알람</item>
+    </string-array>
+</resources>

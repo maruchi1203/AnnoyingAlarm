@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="25dp">
+
+        <TextView
+            android:id="@+id/alarmTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:drawablePadding="5dp"
+            android:text="@string/alarm_setting_kr"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_baseline_alarm_24"
+            app:drawableTint="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TimePicker
+            android:id="@+id/alarmTimePicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:timePickerMode="spinner"
+            app:layout_constraintTop_toBottomOf="@id/alarmTimeTextView" />
+
+        <TextView
+            android:id="@+id/daysTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:drawablePadding="5dp"
+            android:text="@string/days_kr"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_baseline_calendar_today_24"
+            app:layout_constraintStart_toStartOf="@id/alarmTimeTextView"
+            app:layout_constraintTop_toBottomOf="@id/alarmTimePicker" />
+
+        <TextView
+            android:id="@+id/daysCheckedTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            app:layout_constraintBottom_toBottomOf="@id/daysTitleTextView"
+            app:layout_constraintStart_toEndOf="@id/daysTitleTextView"
+            app:layout_constraintTop_toTopOf="@id/daysTitleTextView"
+            tools:text="월, 화, 수, 목, 금, 토, 일" />
+
+        <LinearLayout
+            android:id="@+id/daysCheckBoxList"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="13dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/daysTitleTextView">
+
+            <CheckBox
+                android:id="@+id/mondayCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_unselected"
+                android:button="@color/transparent"
+                android:gravity="center"
+                android:text="@string/monday_kr"
+                android:textColor="@color/black" />
+
+            <CheckBox
+                android:id="@+id/tuesdayCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_unselected"
+                android:button="@color/transparent"
+                android:gravity="center"
+                android:text="@string/tuesday_kr"
+                android:textColor="@color/black" />
+
+            <CheckBox
+                android:id="@+id/wednesdayCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_unselected"
+                android:button="@color/transparent"
+                android:gravity="center"
+                android:text="@string/wednesday_kr"
+                android:textColor="@color/black" />
+
+            <CheckBox
+                android:id="@+id/thursdayCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_unselected"
+                android:button="@color/transparent"
+                android:gravity="center"
+                android:text="@string/thursday_kr"
+                android:textColor="@color/black" />
+
+            <CheckBox
+                android:id="@+id/fridayCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_unselected"
+                android:button="@color/transparent"
+                android:gravity="center"
+                android:text="@string/friday_kr"
+                android:textColor="@color/black" />
+
+            <CheckBox
+                android:id="@+id/saturdayCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_unselected"
+                android:button="@color/transparent"
+                android:gravity="center"
+                android:text="@string/saturday_kr"
+                android:textColor="@color/black" />
+
+            <CheckBox
+                android:id="@+id/sundayCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_unselected"
+                android:button="@color/transparent"
+                android:gravity="center"
+                android:text="@string/sunday_kr"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/alarmModeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:drawablePadding="5dp"
+            android:text="@string/alarm_mode_kr"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_baseline_library_music_24"
+            app:layout_constraintStart_toStartOf="@id/alarmTimeTextView"
+            app:layout_constraintTop_toBottomOf="@id/daysCheckBoxList" />
+
+        <Spinner
+            android:id="@+id/alarmChangeSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/background_thin_stroke"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/alarmModeTextView" />
+
+        <FrameLayout
+            android:id="@+id/selectedModeFragmentView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/alarmChangeSpinner" />
+
+        <EditText
+            android:id="@+id/alarmMemoEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="20dp"
+            android:ellipsize="end"
+            android:hint="메모"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/selectedModeFragmentView" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/saveButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="70dp"
+            android:background="@color/black"
+            android:text="@string/save_kr"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/alarmMemoEditText" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

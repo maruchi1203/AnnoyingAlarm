@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="102dp">
+
+    <ImageButton
+        android:id="@+id/alarmImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:background="@null"
+        android:src="@drawable/ic_baseline_access_alarms_36"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/black"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/alarmItemModeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/alarmImageView"
+        app:layout_constraintStart_toEndOf="@id/alarmImageView"
+        app:layout_constraintTop_toTopOf="@id/alarmImageView"
+        tools:text="커스텀 알람" />
+
+    <TextView
+        android:id="@+id/alarmTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/alarmTimeTextView"
+        app:layout_constraintBottom_toTopOf="@id/alarmTimeTextView"
+        tools:text="알람(메모)" />
+
+    <TextView
+        android:id="@+id/alarmTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_weight="1"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/alarmItemModeTextView"
+        app:layout_constraintStart_toEndOf="@id/alarmItemModeTextView"
+        app:layout_constraintTop_toTopOf="@id/alarmItemModeTextView"
+        tools:ignore="HardcodedText"
+        tools:text="07:30" />
+
+    <LinearLayout
+        android:id="@+id/alarmDaysLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@id/alarmTimeTextView"
+        app:layout_constraintTop_toBottomOf="@id/alarmTimeTextView" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            tools:text="월" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            tools:text="화" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            tools:text="수" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            tools:text="목" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            tools:text="금" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            tools:text="토" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            tools:text="일" />
+
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
