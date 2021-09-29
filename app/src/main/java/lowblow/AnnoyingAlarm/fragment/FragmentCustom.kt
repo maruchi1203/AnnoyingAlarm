@@ -36,7 +36,6 @@ class FragmentCustom : FragmentParent() {
     private var isVibrate = true
     private var isGentleAlarm = false
 
-
     private lateinit var resultListener: ActivityResultLauncher<Intent>
 
     override fun onCreateView(
@@ -128,8 +127,7 @@ class FragmentCustom : FragmentParent() {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
 
 
-        }
-        )
+        })
     }
 
     private fun initGentleAlarm() {

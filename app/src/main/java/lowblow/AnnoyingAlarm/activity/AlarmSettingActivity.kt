@@ -11,6 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import lowblow.AnnoyingAlarm.R
+import lowblow.AnnoyingAlarm.adapter.AlarmListAdapter
 import lowblow.AnnoyingAlarm.data.alarm.AlarmEntity
 import lowblow.AnnoyingAlarm.databinding.AlarmSettingBinding
 import lowblow.AnnoyingAlarm.fragment.*
@@ -56,7 +57,7 @@ class AlarmSettingActivity() : AppCompatActivity() {
         setContentView(binding.root)
 
         CoroutineScope(Dispatchers.IO).launch {
-            alarmEntity = DataController(this@AlarmSettingActivity).getAlarm(intent.getIntExtra("id", 0))
+            alarmEntity = DataController(this@AlarmSettingActivity).getAlarmData(intent.getIntExtra("id", 0))
         }
 
         bindViews()
@@ -199,7 +200,7 @@ class AlarmSettingActivity() : AppCompatActivity() {
 
             if (entityId == -1) {
 
-                DataController(this).alarmCreate(
+                DataController(this).alarmDataCreate(
                     AlarmEntity(
                         0,
                         true,
@@ -217,7 +218,7 @@ class AlarmSettingActivity() : AppCompatActivity() {
 
             } else {
 
-                DataController(this).alarmUpdate(
+                DataController(this).alarmDataUpdate(
                     AlarmEntity(
                         id = entityId,
                         activated = true,
@@ -234,6 +235,7 @@ class AlarmSettingActivity() : AppCompatActivity() {
                 )
 
             }
+
             finish()
         }
     }

@@ -1,15 +1,10 @@
 package lowblow.AnnoyingAlarm.activity
 
 import android.annotation.SuppressLint
-import android.app.AlarmManager
-import android.app.PendingIntent
-import android.content.Intent
 import android.os.Bundle
-import android.os.SystemClock
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import lowblow.AnnoyingAlarm.receiver.AlarmReceiver
 import lowblow.AnnoyingAlarm.databinding.AlarmWakeCustomBinding
+import lowblow.AnnoyingAlarm.system_manager.AlarmController
 
 class AlarmWakeUpActivity : AppCompatActivity() {
 
@@ -22,35 +17,26 @@ class AlarmWakeUpActivity : AppCompatActivity() {
         setContentView(binding.root)
         val id = intent.getIntExtra("id", 0)
 
+        initMusic()
         initSnoozeButton()
         initExitButton()
+    }
+
+    private fun initMusic() {
+
     }
 
     @SuppressLint("UnspecifiedImmutableFlag")
     private fun initSnoozeButton() {
         binding.alarmSnoozeButton.setOnClickListener {
-            val intent = Intent(this, AlarmReceiver::class.java)
-            val alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
-            val trigger = (SystemClock.elapsedRealtime() + 60 * 1000 * 5)
-
-            val pendingIntent = PendingIntent.getBroadcast(
-                this,
-                1,
-                intent,
-                PendingIntent.FLAG_UPDATE_CURRENT
-            )
-
-            alarmManager.set(
-                AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                trigger,
-                pendingIntent
-            )
-
-            Toast.makeText(this, "미루기", Toast.LENGTH_SHORT).show()
+            AlarmController(this).snoozeAlarm()
         }
     }
 
     private fun initExitButton() {
-        finish()
+        binding.alarmWakeCustomCloseButton.setOnClickListener {
+
+            finish()
+        }
     }
 }

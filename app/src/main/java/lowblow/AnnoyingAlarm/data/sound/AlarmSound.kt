@@ -1,6 +1,5 @@
 package lowblow.AnnoyingAlarm.data.sound
 
-import android.graphics.Bitmap
 import android.net.Uri
 
 data class AlarmSound(

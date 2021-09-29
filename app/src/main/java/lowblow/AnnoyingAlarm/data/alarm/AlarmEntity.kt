@@ -1,11 +1,9 @@
 package lowblow.AnnoyingAlarm.data.alarm
 
-import android.net.Uri
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import lowblow.AnnoyingAlarm.data.Mode
-import java.util.*
 
 @Entity
 data class AlarmEntity(

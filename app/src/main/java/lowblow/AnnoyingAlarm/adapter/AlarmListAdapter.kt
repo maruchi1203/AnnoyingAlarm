@@ -1,6 +1,6 @@
 package lowblow.AnnoyingAlarm.adapter
 
-import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -8,21 +8,28 @@ import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isGone
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import lowblow.AnnoyingAlarm.activity.AlarmSettingActivity
 import lowblow.AnnoyingAlarm.data.Mode
 import lowblow.AnnoyingAlarm.system_manager.PreferenceManager
 import lowblow.AnnoyingAlarm.data.alarm.AlarmEntity
 import lowblow.AnnoyingAlarm.databinding.ItemAlarmBinding
+import lowblow.AnnoyingAlarm.system_manager.DataController
+import java.io.Serializable
 import kotlin.math.pow
 
-class AlarmListAdapter(private val alarmList: List<AlarmEntity>, private val context: Context) :
-    RecyclerView.Adapter<AlarmListAdapter.ViewHolder>() {
+class AlarmListAdapter(
+    private val context: Context
+) : ListAdapter<AlarmEntity, AlarmListAdapter.ViewHolder>(diffUtil), Serializable {
 
     inner class ViewHolder(private val binding: ItemAlarmBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
         fun bind(entity: AlarmEntity) {
             val imageView = binding.alarmImageView
 
@@ -50,6 +57,25 @@ class AlarmListAdapter(private val alarmList: List<AlarmEntity>, private val con
                 context.startActivity(intent)
             }
 
+            binding.root.setOnLongClickListener {
+                val builder = AlertDialog.Builder(context)
+
+                builder.setTitle("알람 삭제").setMessage("알람을 삭제하시겠습니까?")
+
+                builder.setPositiveButton("좋아") { _, _ ->
+                    DataController(context).alarmDataDelete(entity)
+                    CoroutineScope(Dispatchers.Main).launch {
+                        this@AlarmListAdapter.submitList(DataController(context).getAllAlarmData())
+                    }
+                }
+
+                builder.setNegativeButton("싫어") { _, _ -> }
+
+                builder.create().show()
+
+                return@setOnLongClickListener true
+            }
+
             binding.alarmTitleTextView.text = if (entity.memo == "") "알람" else entity.memo
 
             binding.alarmTimeTextView.text = if (PreferenceManager(context).getBoolean("isAmPm")) {
@@ -66,9 +92,9 @@ class AlarmListAdapter(private val alarmList: List<AlarmEntity>, private val con
             }
 
             for (i in 0 until binding.alarmDaysLinearLayout.childCount) {
-                binding.alarmDaysLinearLayout.getChildAt(i).isGone = (entity.days and (2.0).pow(i).toInt()) == 0
+                binding.alarmDaysLinearLayout.getChildAt(i).isGone =
+                    (entity.days and (2.0).pow(i).toInt()) == 0
             }
-
         }
     }
 
@@ -83,9 +109,19 @@ class AlarmListAdapter(private val alarmList: List<AlarmEntity>, private val con
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(alarmList[position])
+        holder.bind(getItem(position))
     }
 
-    override fun getItemCount(): Int = alarmList.size
+    companion object {
+        val diffUtil = object : DiffUtil.ItemCallback<AlarmEntity>() {
 
+            override fun areItemsTheSame(oldItem: AlarmEntity, newItem: AlarmEntity): Boolean {
+                return oldItem == newItem
+            }
+
+            override fun areContentsTheSame(oldItem: AlarmEntity, newItem: AlarmEntity): Boolean {
+                return oldItem.id == newItem.id
+            }
+        }
+    }
 }

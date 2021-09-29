@@ -10,17 +10,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import lowblow.AnnoyingAlarm.adapter.AlarmListAdapter
-import lowblow.AnnoyingAlarm.data.alarm.AlarmDatabase
+import lowblow.AnnoyingAlarm.data.Mode
+import lowblow.AnnoyingAlarm.data.alarm.AlarmEntity
 import lowblow.AnnoyingAlarm.databinding.ActivityMainBinding
+import lowblow.AnnoyingAlarm.system_manager.DataController
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private lateinit var database: AlarmDatabase
+    private val adapter by lazy {
+        AlarmListAdapter(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,23 +39,17 @@ class MainActivity : AppCompatActivity() {
             MODE_PRIVATE
         )
 
-        database = AlarmDatabase.getInstance(this)!!
         binding.alarmRecyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
+        binding.alarmRecyclerView.adapter = adapter
 
         initAlarmButton()
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     override fun onStart() {
         super.onStart()
 
-        CoroutineScope(Dispatchers.IO).launch {
-            withContext(Dispatchers.Main) {
-                binding.alarmRecyclerView.adapter = AlarmListAdapter(database.alarmDao().getAllAlarms(), this@MainActivity)
-                (binding.alarmRecyclerView.adapter as AlarmListAdapter).apply {
-                    notifyDataSetChanged()
-                }
-            }
+        CoroutineScope(Dispatchers.Main).launch {
+            adapter.submitList(DataController(this@MainActivity).getAllAlarmData())
         }
     }
 
