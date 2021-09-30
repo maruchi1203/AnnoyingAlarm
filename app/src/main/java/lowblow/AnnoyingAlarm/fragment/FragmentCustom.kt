@@ -63,6 +63,8 @@ class FragmentCustom : FragmentParent() {
                     selectedUri = Uri.parse(result.data!!.getStringExtra("selectedUri"))
                     binding.alarmMusicChangeButton.text =
                         result.data!!.getStringExtra("selectedTitle")
+                } else {
+                    binding.alarmMusicChangeButton.text = "무음"
                 }
             }
 

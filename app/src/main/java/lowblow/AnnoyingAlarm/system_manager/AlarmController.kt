@@ -1,5 +1,6 @@
 package lowblow.AnnoyingAlarm.system_manager
 
+import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
@@ -9,14 +10,17 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import lowblow.AnnoyingAlarm.data.alarm.AlarmEntity
 import lowblow.AnnoyingAlarm.receiver.AlarmReceiver
+import java.text.SimpleDateFormat
 import java.util.*
 
 class AlarmController(private val context: Context) {
 
-    private val alarmManager = context.getSystemService(AppCompatActivity.ALARM_SERVICE) as AlarmManager
+    private val alarmManager =
+        context.getSystemService(AppCompatActivity.ALARM_SERVICE) as AlarmManager
     private val intent = Intent(context, AlarmReceiver::class.java)
 
-    fun setAlarm(alarmEntity : AlarmEntity) {
+    @SuppressLint("SimpleDateFormat")
+    fun setAlarm(alarmEntity: AlarmEntity) {
 
         val calendar = Calendar.getInstance().apply {
             timeInMillis = System.currentTimeMillis()
@@ -29,11 +33,13 @@ class AlarmController(private val context: Context) {
             calendar.add(Calendar.DATE, 1)
         }
 
+        intent.putExtra("id", alarmEntity.id)
+
         val pendingIntent = PendingIntent.getBroadcast(
             context.applicationContext,
             alarmEntity.id,
             intent,
-            PendingIntent.FLAG_CANCEL_CURRENT
+            PendingIntent.FLAG_UPDATE_CURRENT
         )
 
         alarmManager.setInexactRepeating(
@@ -42,6 +48,12 @@ class AlarmController(private val context: Context) {
             AlarmManager.INTERVAL_DAY,
             pendingIntent
         )
+
+        Toast.makeText(
+            context,
+            SimpleDateFormat("yyyy/MM/dd/ HH시:mm분 알람설정").format(calendar.time),
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     fun snoozeAlarm() {
@@ -53,7 +65,7 @@ class AlarmController(private val context: Context) {
             context.applicationContext,
             0,
             intent,
-            PendingIntent.FLAG_CANCEL_CURRENT
+            PendingIntent.FLAG_UPDATE_CURRENT
         )
 
         alarmManager.set(
@@ -65,12 +77,12 @@ class AlarmController(private val context: Context) {
         Toast.makeText(context, "미루기", Toast.LENGTH_SHORT).show()
     }
 
-    fun cancelAlarm(alarmEntity : AlarmEntity) {
+    fun cancelAlarm(alarmEntity: AlarmEntity) {
         val pendingIntent = PendingIntent.getBroadcast(
             context.applicationContext,
             alarmEntity.id,
             intent,
-            PendingIntent.FLAG_CANCEL_CURRENT
+            PendingIntent.FLAG_UPDATE_CURRENT
         )
 
         alarmManager.cancel(pendingIntent)

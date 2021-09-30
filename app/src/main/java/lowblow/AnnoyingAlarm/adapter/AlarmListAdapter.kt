@@ -19,6 +19,7 @@ import lowblow.AnnoyingAlarm.data.Mode
 import lowblow.AnnoyingAlarm.system_manager.PreferenceManager
 import lowblow.AnnoyingAlarm.data.alarm.AlarmEntity
 import lowblow.AnnoyingAlarm.databinding.ItemAlarmBinding
+import lowblow.AnnoyingAlarm.system_manager.AlarmController
 import lowblow.AnnoyingAlarm.system_manager.DataController
 import java.io.Serializable
 import kotlin.math.pow
@@ -44,9 +45,11 @@ class AlarmListAdapter(
                 if (entity.activated) {
                     imageView.setColorFilter(Color.parseColor("#ffcccccc"), PorterDuff.Mode.SRC_IN)
                     entity.activated = false
+                    AlarmController(context).cancelAlarm(entity)
                 } else {
                     imageView.setColorFilter(Color.parseColor("#ff000000"), PorterDuff.Mode.SRC_IN)
                     entity.activated = true
+                    AlarmController(context).setAlarm(entity)
                 }
             }
 

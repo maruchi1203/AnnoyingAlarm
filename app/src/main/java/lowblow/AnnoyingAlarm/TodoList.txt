@@ -11,3 +11,6 @@ AlarmListAdapter
  -알람 삭제 기능 추가
  -RecyclerView.Adapter에서 ListAdapter로 변경
  -Item 관리를 위한 DiffUtil 추가
+
+2021년 9월 30일
+ -AlarmWakeUpActivity에 알람 세부기능(알람 볼륨, 부드러운 알람) 추가

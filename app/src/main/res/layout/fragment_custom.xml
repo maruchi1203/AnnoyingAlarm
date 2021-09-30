@@ -54,7 +54,7 @@
             android:paddingStart="16dp"
             android:shadowColor="@color/black"
             tools:ignore="RtlSymmetry"
-            tools:text="알람 소리" />
+            android:text="무음" />
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/alarmPlayTestButton"

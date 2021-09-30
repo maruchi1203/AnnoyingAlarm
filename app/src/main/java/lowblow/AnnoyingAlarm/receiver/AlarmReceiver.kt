@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.util.Log
+import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import lowblow.AnnoyingAlarm.R
 import lowblow.AnnoyingAlarm.activity.AlarmWakeUpActivity
@@ -16,22 +17,21 @@ class AlarmReceiver : BroadcastReceiver() {
     private lateinit var notificationManager: NotificationManager
 
     override fun onReceive(context: Context, intent: Intent) {
-        Log.e("TAG", "$context, $intent")
         notificationManager = context.getSystemService(
             Context.NOTIFICATION_SERVICE
         ) as NotificationManager
 
-        wakeUpAlarm(context)
+        wakeUpAlarm(context, intent.getIntExtra("id", 0))
     }
 
-    private fun wakeUpAlarm(context: Context) {
+    private fun wakeUpAlarm(context: Context, id: Int) {
         val alarmIntent = Intent("android.intent.action.sec")
 
         alarmIntent.apply {
             setClass(context, AlarmWakeUpActivity::class.java)
             flags = Intent.FLAG_ACTIVITY_NEW_TASK
 
-            putExtra("id", 0)
+            putExtra("id", id)
         }
 
         context.startActivity(alarmIntent)
