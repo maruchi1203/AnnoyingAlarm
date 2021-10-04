@@ -1,0 +1,22 @@
+커스텀 알람
+모기 알람
+사이렌 알람
+메세지 알람
+
+2021년 9월 29일
+쓸모없는 코드 정리
+AlarmController
+ -기능 추가
+AlarmListAdapter
+ -알람 삭제 기능 추가
+ -RecyclerView.Adapter에서 ListAdapter로 변경
+ -Item 관리를 위한 DiffUtil 추가
+
+2021년 9월 30일
+ -AlarmWakeUpActivity에 알람 세부기능(알람 볼륨, 부드러운 알람) 추가
+
+2021년 10월 4일
+ -알람 처음 생성시 생기는 버그(id 오류) 수정
+ -요일 출력 방법 변경
+ - AlarmWakeUpActivity 실행 후 MainActivity RecyclerView가 갱신되지 않는 버그 발생
+ → MainActivity onStart()에서 onResume()으로 변경

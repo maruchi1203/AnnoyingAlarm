@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/AnnoyingAlarm/app/src/main/res/layout/activity_choose_alarm_sound.xml" value="0.13055555555555556" />
         <entry key="..\:/Users/maruc/AndroidStudioProjects/AnnoyingAlarm/app/src/main/res/layout/activity_main.xml" value="0.1736111111111111" />
         <entry key="..\:/Users/maruc/AndroidStudioProjects/AnnoyingAlarm/app/src/main/res/layout/alarm_setting.xml" value="0.17395833333333333" />
         <entry key="..\:/Users/maruc/AndroidStudioProjects/AnnoyingAlarm/app/src/main/res/layout/fragment_custom.xml" value="0.24409722222222222" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/AnnoyingAlarm/app/src/main/res/layout/item_alarm.xml" value="0.24409722222222222" />
         <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.14722222222222223" />
         <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable/background_thin_stroke.xml" value="0.1482638888888889" />
         <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable/button_selected.xml" value="0.221875" />

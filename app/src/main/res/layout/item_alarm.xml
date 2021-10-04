@@ -55,58 +55,12 @@
         tools:ignore="HardcodedText"
         tools:text="07:30" />
 
-    <LinearLayout
-        android:id="@+id/alarmDaysLinearLayout"
+    <TextView
+        android:id="@+id/alarmDaysTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="@id/alarmTimeTextView"
-        app:layout_constraintTop_toBottomOf="@id/alarmTimeTextView" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:text="월" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:text="화" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:text="수" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:text="목" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:text="금" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:text="토" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:text="일" />
-
-    </LinearLayout>
-
-
+        app:layout_constraintTop_toBottomOf="@id/alarmTimeTextView"
+        tools:text="매일" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

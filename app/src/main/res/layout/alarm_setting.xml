@@ -49,16 +49,6 @@
             app:layout_constraintStart_toStartOf="@id/alarmTimeTextView"
             app:layout_constraintTop_toBottomOf="@id/alarmTimePicker" />
 
-        <TextView
-            android:id="@+id/daysCheckedTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            app:layout_constraintBottom_toBottomOf="@id/daysTitleTextView"
-            app:layout_constraintStart_toEndOf="@id/daysTitleTextView"
-            app:layout_constraintTop_toTopOf="@id/daysTitleTextView"
-            tools:text="월, 화, 수, 목, 금, 토, 일" />
-
         <LinearLayout
             android:id="@+id/daysCheckBoxList"
             android:layout_width="0dp"
@@ -70,6 +60,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/daysTitleTextView">
+
+            <CheckBox
+                android:id="@+id/sundayCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_unselected"
+                android:button="@color/transparent"
+                android:gravity="center"
+                android:text="@string/sunday_kr"
+                android:textColor="@color/black" />
 
             <CheckBox
                 android:id="@+id/mondayCheckBox"
@@ -143,17 +145,6 @@
                 android:text="@string/saturday_kr"
                 android:textColor="@color/black" />
 
-            <CheckBox
-                android:id="@+id/sundayCheckBox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="2dp"
-                android:layout_weight="1"
-                android:background="@drawable/button_unselected"
-                android:button="@color/transparent"
-                android:gravity="center"
-                android:text="@string/sunday_kr"
-                android:textColor="@color/black" />
 
         </LinearLayout>
 
