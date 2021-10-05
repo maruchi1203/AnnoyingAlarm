@@ -7,11 +7,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.SystemClock
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import lowblow.annoying_alarm.data.alarm.AlarmEntity
 import lowblow.annoying_alarm.receiver.AlarmReceiver
-import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.pow
 
@@ -41,6 +39,7 @@ class AlarmController(private val context: Context) {
                 val dayOfTheWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1
                 for (i in 1..7) {
                     if ((alarmEntity.days and (2.0).pow((dayOfTheWeek + i) % 7).toInt()) != 0) {
+                        calendar.add(Calendar.DATE, i)
                         break
                     }
                 }

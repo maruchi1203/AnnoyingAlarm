@@ -20,3 +20,7 @@ AlarmListAdapter
  -요일 출력 방법 변경
  - AlarmWakeUpActivity 실행 후 MainActivity RecyclerView가 갱신되지 않는 버그 발생
  → MainActivity onStart()에서 onResume()으로 변경
+
+2021년 10월 5일
+ -RecyclerView 갱신 안되는 버그 재발생 -> 수정
+ -알람이 잠금화면 위로 뜨는 기능 추가

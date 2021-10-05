@@ -6,7 +6,7 @@ import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.*
-import android.util.Log
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,13 +29,16 @@ class AlarmWakeUpActivity : AppCompatActivity() {
     }
     private lateinit var data: AlarmEntity
 
+    private lateinit var powerManager: PowerManager
+    private lateinit var wakeLock: PowerManager.WakeLock
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         val id = intent.getLongExtra("id", 0)
 
-        Log.e("AlarmWakeUpActivity", id.toString())
+        initWakeLock()
 
         CoroutineScope(Dispatchers.Main).launch {
             data = DataController(this@AlarmWakeUpActivity).getAlarmData(id)!!
@@ -45,8 +48,27 @@ class AlarmWakeUpActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {}
+
+    private fun initWakeLock() {
+        window.addFlags(
+            WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON or
+                    WindowManager.LayoutParams.FLAG_ALLOW_LOCK_WHILE_SCREEN_ON
+        )
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            setShowWhenLocked(true)
+            setTurnScreenOn(true)
+        } else
+            window.addFlags(
+                WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or
+                        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+            )
+
+    }
+
     private fun initSound() {
-        if(data.alarmUri != null) {
+        if (data.alarmUri != null) {
             media.setAudioAttributes(
                 AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_ALARM)
@@ -57,9 +79,9 @@ class AlarmWakeUpActivity : AppCompatActivity() {
             media.prepare()
             media.start()
 
-            if(data.gentleAlarm) {
+            if (data.gentleAlarm) {
                 thread(start = true) {
-                    for (i in 0..(data.loudness*100).toInt()) {
+                    for (i in 0..(data.loudness * 100).toInt()) {
                         media.setVolume(i.toFloat() / 100, i.toFloat() / 100)
 
                         Thread.sleep(1000)
@@ -71,8 +93,8 @@ class AlarmWakeUpActivity : AppCompatActivity() {
             }
         }
 
-        if(data.vibration) {
-            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+        if (data.vibration) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
                 vibrate.vibrate(1000)
             } else {
                 val timing = longArrayOf(100, 100, 400)
@@ -90,6 +112,9 @@ class AlarmWakeUpActivity : AppCompatActivity() {
             AlarmController(this).snoozeAlarm()
             media.reset()
             vibrate.cancel()
+
+            if (wakeLock.isHeld) wakeLock.release()
+
             finish()
         }
     }
@@ -98,16 +123,16 @@ class AlarmWakeUpActivity : AppCompatActivity() {
         binding.alarmWakeCustomCloseButton.setOnClickListener {
             media.reset()
             vibrate.cancel()
-            finish()
-        }
-    }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        if(data.days == 0) {
-            DataController(this).alarmDataDelete(data)
-        } else {
-            AlarmController(this).setAlarm(data.id, data)
+            if (data.days == 0) {
+                DataController(this).alarmDataDelete(data)
+            } else {
+                AlarmController(this).setAlarm(data.id, data)
+            }
+
+            if (wakeLock.isHeld) wakeLock.release()
+
+            finish()
         }
     }
 }

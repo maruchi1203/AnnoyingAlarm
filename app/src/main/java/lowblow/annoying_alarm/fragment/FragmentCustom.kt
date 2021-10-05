@@ -55,6 +55,12 @@ class FragmentCustom : FragmentParent() {
         return binding.root
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        media.release()
+    }
+
     private fun initMusicChangeButton() {
 
         resultListener =

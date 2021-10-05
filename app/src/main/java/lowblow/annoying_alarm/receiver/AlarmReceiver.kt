@@ -15,11 +15,12 @@ class AlarmReceiver : BroadcastReceiver() {
     private lateinit var notificationManager: NotificationManager
 
     override fun onReceive(context: Context, intent: Intent) {
+        val id = intent.extras!!.getLong("id")
+
         notificationManager = context.getSystemService(
             Context.NOTIFICATION_SERVICE
         ) as NotificationManager
 
-        val id = intent.extras!!.getLong("id")
         wakeUpAlarm(context, id)
     }
 
