@@ -127,4 +127,13 @@
         
     </LinearLayout>
 
+    <View
+        android:id="@+id/clickBlockingView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/alarmSoundControlSeekBar"
+        app:layout_constraintBottom_toBottomOf="@id/alarmGentleSoundLinearLayout" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

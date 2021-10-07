@@ -15,6 +15,7 @@ import lowblow.annoying_alarm.data.alarm.AlarmEntity
 import lowblow.annoying_alarm.databinding.AlarmWakeCustomBinding
 import lowblow.annoying_alarm.system_manager.AlarmController
 import lowblow.annoying_alarm.system_manager.DataController
+import java.lang.Exception
 import kotlin.concurrent.thread
 
 class AlarmWakeUpActivity : AppCompatActivity() {
@@ -28,9 +29,6 @@ class AlarmWakeUpActivity : AppCompatActivity() {
         getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
     }
     private lateinit var data: AlarmEntity
-
-    private lateinit var powerManager: PowerManager
-    private lateinit var wakeLock: PowerManager.WakeLock
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,12 +78,14 @@ class AlarmWakeUpActivity : AppCompatActivity() {
             media.start()
 
             if (data.gentleAlarm) {
-                thread(start = true) {
-                    for (i in 0..(data.loudness * 100).toInt()) {
-                        media.setVolume(i.toFloat() / 100, i.toFloat() / 100)
+                thread(true) {
+                    try {
+                        for (i in 0..(data.loudness * 100).toInt()) {
+                            media.setVolume(i.toFloat() / 100, i.toFloat() / 100)
 
-                        Thread.sleep(1000)
-                    }
+                            Thread.sleep(1000)
+                        }
+                    } catch (e : Exception) {}
                 }
 
             } else {
@@ -110,10 +110,9 @@ class AlarmWakeUpActivity : AppCompatActivity() {
     private fun initSnoozeButton() {
         binding.alarmSnoozeButton.setOnClickListener {
             AlarmController(this).snoozeAlarm()
-            media.reset()
+            media.release()
             vibrate.cancel()
 
-            if (wakeLock.isHeld) wakeLock.release()
 
             finish()
         }
@@ -121,7 +120,7 @@ class AlarmWakeUpActivity : AppCompatActivity() {
 
     private fun initExitButton() {
         binding.alarmWakeCustomCloseButton.setOnClickListener {
-            media.reset()
+            media.release()
             vibrate.cancel()
 
             if (data.days == 0) {
@@ -129,8 +128,6 @@ class AlarmWakeUpActivity : AppCompatActivity() {
             } else {
                 AlarmController(this).setAlarm(data.id, data)
             }
-
-            if (wakeLock.isHeld) wakeLock.release()
 
             finish()
         }

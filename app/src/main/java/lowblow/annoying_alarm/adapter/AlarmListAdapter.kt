@@ -94,18 +94,19 @@ class AlarmListAdapter(
             binding.alarmTitleTextView.text = if (entity.memo == "") "알람" else entity.memo
 
             //알람 시간 표시
-            binding.alarmTimeTextView.text = if (PreferenceManager(context).getBoolean("isAmPm")) {
-                "%s %02d : %02d".format(
-                    (if (entity.hour < 12) "오전" else "오후"),
-                    (if (entity.hour % 12 == 0) 12 else entity.hour % 12),
-                    entity.minute
-                )
-            } else {
-                "%02d : %02d".format(
-                    entity.hour,
-                    entity.minute
-                )
-            }
+            binding.alarmTimeTextView.text =
+                if (PreferenceManager(context.applicationContext).getBoolean("is24hour")) {
+                    "%s %02d : %02d".format(
+                        (if (entity.hour < 12) "오전" else "오후"),
+                        (if (entity.hour % 12 == 0) 12 else entity.hour % 12),
+                        entity.minute
+                    )
+                } else {
+                    "%02d : %02d".format(
+                        entity.hour,
+                        entity.minute
+                    )
+                }
 
             //알람 반복 요일, 작동 시간 표시
             bindDaysTextView(binding, entity)

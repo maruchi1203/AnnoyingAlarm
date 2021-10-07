@@ -15,6 +15,7 @@ import kotlinx.coroutines.launch
 import lowblow.annoying_alarm.adapter.AlarmListAdapter
 import lowblow.annoying_alarm.databinding.ActivityMainBinding
 import lowblow.annoying_alarm.system_manager.DataController
+import lowblow.annoying_alarm.system_manager.PreferenceManager
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -31,12 +32,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initSetting()
+        initAlarmButton()
 
         binding.alarmRecyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
         binding.alarmRecyclerView.adapter = adapter
-
-        initAlarmButton()
     }
+
+
 
     override fun onResume() {
         super.onResume()
@@ -59,10 +61,6 @@ class MainActivity : AppCompatActivity() {
             val uri = Uri.fromParts("package", packageName, null)
             val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, uri)
             startActivity(intent)
-        }
-
-        if (!Settings.canDrawOverlays(this)) {
-            Toast.makeText(this, "다른 앱 위에 그리기가 허용되지 않았습니다", Toast.LENGTH_SHORT).show()
             finish()
         }
     }

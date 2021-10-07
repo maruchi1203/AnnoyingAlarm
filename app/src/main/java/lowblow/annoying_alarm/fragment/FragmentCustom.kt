@@ -29,9 +29,6 @@ class FragmentCustom : FragmentParent() {
 
     private var isPaused: Boolean = true
 
-    //진동 버튼
-    private lateinit var vibrationSwitch: SwitchCompat
-
     private var loudness: Float = 1.toFloat()
     private var isVibrate = true
     private var isGentleAlarm = false
@@ -44,7 +41,6 @@ class FragmentCustom : FragmentParent() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCustomBinding.inflate(layoutInflater)
-        vibrationSwitch = binding.alarmVibrationSwitchCompat
 
         initMusicChangeButton()
         initAlarmPlayTestButton()
@@ -63,19 +59,36 @@ class FragmentCustom : FragmentParent() {
 
     private fun initMusicChangeButton() {
 
+        controlSoundControlLayouts(false)
+
         resultListener =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == RESULT_CODE && result.data != null) {
                     selectedUri = Uri.parse(result.data!!.getStringExtra("selectedUri"))
                     binding.alarmMusicChangeButton.text =
                         result.data!!.getStringExtra("selectedTitle")
+                    controlSoundControlLayouts(true)
                 } else {
                     binding.alarmMusicChangeButton.text = "무음"
+                    controlSoundControlLayouts(false)
                 }
             }
 
         binding.alarmMusicChangeButton.setOnClickListener {
             resultListener.launch(Intent(requireContext(), AlarmSoundActivity::class.java))
+        }
+    }
+
+    private fun controlSoundControlLayouts(isExisting: Boolean) {
+        binding.clickBlockingView.isClickable = !isExisting
+        if(!isExisting) {
+            binding.alarmSoundControlTextView.alpha = 0.1f
+            binding.alarmSoundControlSeekBar.alpha = 0.1f
+            binding.alarmGentleSoundLinearLayout.alpha = 0.1f
+        } else {
+            binding.alarmSoundControlTextView.alpha = 1f
+            binding.alarmSoundControlSeekBar.alpha = 1f
+            binding.alarmGentleSoundLinearLayout.alpha = 1f
         }
     }
 
@@ -108,6 +121,7 @@ class FragmentCustom : FragmentParent() {
     }
 
     private fun initVibrationSwitch() {
+        val vibrationSwitch = binding.alarmVibrationSwitchCompat
         vibrationSwitch.setOnCheckedChangeListener { _, isChecked ->
             isVibrate = !isChecked
             if (isVibrate) {
@@ -156,7 +170,7 @@ class FragmentCustom : FragmentParent() {
 
     }
 
-    fun setData(alarmFragmentData : AlarmFragmentData) {
+    override fun setData(data : AlarmFragmentData) {
 
     }
 

@@ -16,4 +16,8 @@ abstract class FragmentParent : Fragment() {
         )
     }
 
+    open fun setData(data : AlarmFragmentData) {
+
+    }
+
 }

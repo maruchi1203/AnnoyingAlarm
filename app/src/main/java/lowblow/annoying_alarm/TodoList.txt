@@ -24,3 +24,7 @@ AlarmListAdapter
 2021년 10월 5일
  -RecyclerView 갱신 안되는 버그 재발생 -> 수정
  -알람이 잠금화면 위로 뜨는 기능 추가
+
+2021년 10월 7일
+ -AlarmSettingActivity가 Fragment의 정보를 받아오지 못하는 버그 수정
+ -PreferenceManager 수정
