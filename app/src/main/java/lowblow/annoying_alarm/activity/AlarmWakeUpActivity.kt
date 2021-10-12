@@ -74,20 +74,21 @@ class AlarmWakeUpActivity : AppCompatActivity() {
                     .build()
             )
             media.setDataSource(this, Uri.parse(data.alarmUri))
+            media.isLooping = true
             media.prepare()
             media.start()
 
             if (data.gentleAlarm) {
-                thread(true) {
-                    try {
+                try {
+                    thread(true) {
                         for (i in 0..(data.loudness * 100).toInt()) {
                             media.setVolume(i.toFloat() / 100, i.toFloat() / 100)
 
                             Thread.sleep(1000)
                         }
-                    } catch (e : Exception) {}
+                    }
                 }
-
+                catch (e : Exception) {}
             } else {
                 media.setVolume(data.loudness, data.loudness)
             }

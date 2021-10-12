@@ -28,3 +28,6 @@ AlarmListAdapter
 2021년 10월 7일
  -AlarmSettingActivity가 Fragment의 정보를 받아오지 못하는 버그 수정
  -PreferenceManager 수정
+
+2021년 10월 13일
+ -FragmentCustom 알람음 설정에 무음, 벨소리, 음악 분류 추가

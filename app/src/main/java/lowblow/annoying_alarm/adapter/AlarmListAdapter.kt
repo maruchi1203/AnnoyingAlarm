@@ -33,7 +33,7 @@ import kotlin.math.pow
 
 class AlarmListAdapter(
     private val context: Context
-) : ListAdapter<AlarmEntity, AlarmListAdapter.ViewHolder>(diffUtil), Serializable {
+) : ListAdapter<AlarmEntity, AlarmListAdapter.ViewHolder>(diffUtil) {
 
     inner class ViewHolder(private val binding: ItemAlarmBinding) :
         RecyclerView.ViewHolder(binding.root) {

@@ -62,6 +62,7 @@ class AlarmSettingActivity : AppCompatActivity() {
                 )
             }
             initViews()
+
         }
     }
 
@@ -94,7 +95,7 @@ class AlarmSettingActivity : AppCompatActivity() {
     }
 
     private fun initDaysList() {
-        daysSave = alarmEntity?.days!!
+        alarmEntity?.let { daysSave = it.days }
 
         for (i in 0 until daysCheckBox.count()) {
             val daysBit = (2.0).pow(i).toInt()

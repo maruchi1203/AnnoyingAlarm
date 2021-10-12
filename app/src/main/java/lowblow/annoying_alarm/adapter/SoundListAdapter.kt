@@ -2,11 +2,14 @@ package lowblow.annoying_alarm.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import lowblow.annoying_alarm.data.sound.AlarmSound
 import lowblow.annoying_alarm.databinding.ItemAlarmSoundBinding
 
-class SoundListAdapter(private val mp3List : List<AlarmSound>, val selectMusic: (String, String) -> Unit) : RecyclerView.Adapter<SoundListAdapter.ViewHolder>() {
+class SoundListAdapter(val selectMusic: (String, String) -> Unit) :
+    ListAdapter<AlarmSound, SoundListAdapter.ViewHolder>(diffUtil) {
 
     inner class ViewHolder(private val binding: ItemAlarmSoundBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -32,12 +35,21 @@ class SoundListAdapter(private val mp3List : List<AlarmSound>, val selectMusic: 
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(mp3List[position])
+        holder.bind(getItem(position))
     }
 
-    override fun getItemCount(): Int {
-        return mp3List.size
-    }
 
+    companion object {
+        val diffUtil = object : DiffUtil.ItemCallback<AlarmSound>() {
+            override fun areItemsTheSame(oldItem: AlarmSound, newItem: AlarmSound): Boolean {
+                return oldItem == newItem
+            }
+
+            override fun areContentsTheSame(oldItem: AlarmSound, newItem: AlarmSound): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+        }
+    }
 
 }

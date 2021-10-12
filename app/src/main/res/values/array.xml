@@ -6,4 +6,10 @@
         <item>모기 습격 알람</item>
         <item>O톡 메세지 알람</item>
     </string-array>
+
+    <string-array name="alarm_sound_type">
+        <item>무음</item>
+        <item>벨소리</item>
+        <item>음악</item>
+    </string-array>
 </resources>

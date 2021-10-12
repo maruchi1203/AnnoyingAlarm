@@ -6,7 +6,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.webkit.MimeTypeMap
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,7 +34,7 @@ class AlarmSoundActivity : AppCompatActivity() {
     @SuppressLint("NotifyDataSetChanged")
     private fun initRecyclerView() {
         binding.alarmSoundRecyclerView.layoutManager = LinearLayoutManager(this)
-        binding.alarmSoundRecyclerView.adapter = SoundListAdapter(loadRecycleItemData()) { uri, title ->
+        binding.alarmSoundRecyclerView.adapter = SoundListAdapter() { uri, title ->
             selectedUri = uri
             selectedTitle = title
 
@@ -49,12 +48,15 @@ class AlarmSoundActivity : AppCompatActivity() {
             finish()
         }
 
+        (binding.alarmSoundRecyclerView.adapter as SoundListAdapter).submitList(loadRecycleItemData())
+
         (binding.alarmSoundRecyclerView.adapter as? SoundListAdapter)?.apply {
             notifyDataSetChanged()
         }
     }
 
     private fun loadRecycleItemData(): MutableList<AlarmSound> {
+        val soundType = intent.getStringExtra("soundType")
         val state = Environment.getExternalStorageState()
 
         if (Environment.MEDIA_MOUNTED != state &&
@@ -67,22 +69,19 @@ class AlarmSoundActivity : AppCompatActivity() {
         val uriExternal = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
 
         val projection = arrayOf(
-            MediaStore.Audio.Media.IS_MUSIC,
-            MediaStore.Audio.Media.IS_ALARM,
             MediaStore.Audio.Media.TITLE,
             MediaStore.Audio.Media.ARTIST,
             MediaStore.Audio.Media._ID
         )
 
-        val selectionMimeType = MediaStore.Files.FileColumns.MIME_TYPE + "=?"
-
-        val mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension("mp3")
+        //IS_RINGTONE, IS_ALARM.... << These are compared with INTEGER
+        val selection = "$soundType != 0"
 
         val cursor = contentResolver.query(
             uriExternal,
             projection,
-            selectionMimeType,
-            arrayOf(mimeType),
+            selection,
+            null,
             MediaStore.Audio.Media.TITLE + " ASC"
         )
 
