@@ -1,4 +1,4 @@
-package lowblow.annoying_alarm.activity
+package lowblow.annoying_alarm.activity.wakeup_activity
 
 import android.annotation.SuppressLint
 import android.content.Context

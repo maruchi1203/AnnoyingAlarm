@@ -51,5 +51,4 @@ class SoundListAdapter(val selectMusic: (String, String) -> Unit) :
 
         }
     }
-
 }

@@ -15,6 +15,9 @@ import lowblow.annoying_alarm.databinding.ActivityChooseAlarmSoundBinding
 
 class AlarmSoundActivity : AppCompatActivity() {
 
+    //Activated by FragmentCustom
+    //Show RecyclerView with list of alarm sounds
+
     private val binding by lazy {
         ActivityChooseAlarmSoundBinding.inflate(layoutInflater)
     }
@@ -103,8 +106,12 @@ class AlarmSoundActivity : AppCompatActivity() {
                     )
                 )
             }
-            cursor.close()
+        } else {
+            Toast.makeText(this, "파일이 존재하지 않습니다", Toast.LENGTH_SHORT).show()
+            finish()
         }
+
+        cursor.close()
 
         return mp3ListArray
     }

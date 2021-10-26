@@ -107,7 +107,7 @@ class AlarmSettingActivity : AppCompatActivity() {
 
             daysCheckBox[i].setOnCheckedChangeListener { view, isChecked ->
                 //월요일부터 1, 2, 4... (비트마스크)로 날짜 구별
-                changeCheckBoxColor(isChecked, view)
+                changeCheckBoxColor(isChecked, daysCheckBox[i])
 
                 if (isChecked) {
                     view.setBackgroundResource(R.drawable.button_selected)
@@ -124,9 +124,10 @@ class AlarmSettingActivity : AppCompatActivity() {
         if (Build.VERSION_CODES.M > Build.VERSION.SDK_INT) {
             if (isChecked) {
                 view.setTextColor(resources.getColor(R.color.white))
+                view.setBackgroundResource(R.drawable.button_selected)
             } else {
-
                 view.setTextColor(resources.getColor(R.color.black))
+                view.setBackgroundResource(R.drawable.button_unselected)
             }
         } else {
             if (isChecked) {
@@ -136,6 +137,7 @@ class AlarmSettingActivity : AppCompatActivity() {
                         R.color.white
                     )
                 )
+                view.setBackgroundResource(R.drawable.button_selected)
             } else {
                 view.setTextColor(
                     ContextCompat.getColor(
@@ -143,6 +145,7 @@ class AlarmSettingActivity : AppCompatActivity() {
                         R.color.black
                     )
                 )
+                view.setBackgroundResource(R.drawable.button_unselected)
             }
         }
     }

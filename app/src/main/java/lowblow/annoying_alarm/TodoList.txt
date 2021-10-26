@@ -31,3 +31,8 @@ AlarmListAdapter
 
 2021년 10월 13일
  -FragmentCustom 알람음 설정에 무음, 벨소리, 음악 분류 추가
+
+2021년 10월 26일
+ -AlarmSettingActivity 버그 수정
+ -FragmentCustom 벨소리, 음악에 아무 것도 없을 시에 꺼짐
+ -FragmentMosquito 센서매니저 추가

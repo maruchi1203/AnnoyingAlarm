@@ -38,12 +38,10 @@ class MainActivity : AppCompatActivity() {
         binding.alarmRecyclerView.adapter = adapter
     }
 
-
-
     override fun onResume() {
         super.onResume()
 
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(Dispatchers.Main).launch {
             adapter.submitList(DataController(this@MainActivity).getAllAlarmData())
         }
     }

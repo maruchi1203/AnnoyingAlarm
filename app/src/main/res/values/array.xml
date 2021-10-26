@@ -2,14 +2,19 @@
 <resources>
     <string-array name="alarm_theme">
         <item>커스텀 알람</item>
-        <item>공습 경보 알람</item>
-        <item>모기 습격 알람</item>
-        <item>O톡 메세지 알람</item>
+        <item>모기 습격</item>
+        <item>암튼 시끄러운 거</item>
+        <item>O톡 메세지 폭탄</item>
     </string-array>
 
     <string-array name="alarm_sound_type">
         <item>무음</item>
         <item>벨소리</item>
         <item>음악</item>
+    </string-array>
+
+    <string-array name="alarm_exit_type">
+        <item>버튼</item>
+        <item>흔들기</item>
     </string-array>
 </resources>

@@ -8,7 +8,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import lowblow.annoying_alarm.R
-import lowblow.annoying_alarm.activity.AlarmWakeUpActivity
+import lowblow.annoying_alarm.activity.wakeup_activity.AlarmWakeUpActivity
 
 class AlarmReceiver : BroadcastReceiver() {
 

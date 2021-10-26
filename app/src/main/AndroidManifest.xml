@@ -31,7 +31,7 @@
         <activity android:name="lowblow.annoying_alarm.activity.AlarmSettingActivity" />
         <activity android:name="lowblow.annoying_alarm.activity.AlarmSoundActivity" />
         <activity
-            android:name="lowblow.annoying_alarm.activity.AlarmWakeUpActivity"
+            android:name="lowblow.annoying_alarm.activity.wakeup_activity.AlarmWakeUpActivity"
             android:launchMode="singleInstance"
             android:showWhenLocked="true"
             android:turnScreenOn="true"
