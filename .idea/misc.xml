@@ -3,8 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AnnoyingAlarm/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.38229166666666664" />
         <entry key="..\:/AnnoyingAlarm/app/src/main/res/drawable/button_selected.xml" value="0.38229166666666664" />
         <entry key="..\:/AnnoyingAlarm/app/src/main/res/drawable/button_unselected.xml" value="0.38229166666666664" />
+        <entry key="..\:/AnnoyingAlarm/app/src/main/res/drawable/ic_baseline_add_28.xml" value="0.38229166666666664" />
+        <entry key="..\:/AnnoyingAlarm/app/src/main/res/drawable/ic_baseline_alarm_24.xml" value="0.38229166666666664" />
+        <entry key="..\:/AnnoyingAlarm/app/src/main/res/drawable/ic_baseline_alarm_on_108.xml" value="0.38229166666666664" />
+        <entry key="..\:/AnnoyingAlarm/app/src/main/res/drawable/ic_baseline_alarm_on_128.xml" value="0.38229166666666664" />
+        <entry key="..\:/AnnoyingAlarm/app/src/main/res/drawable/ic_baseline_alarm_on_24.xml" value="0.38229166666666664" />
+        <entry key="..\:/AnnoyingAlarm/app/src/main/res/drawable/ic_launcher_background.xml" value="0.38229166666666664" />
         <entry key="..\:/AnnoyingAlarm/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/AnnoyingAlarm/app/src/main/res/layout/alarm_setting.xml" value="0.36614583333333334" />
         <entry key="..\:/AnnoyingAlarm/app/src/main/res/layout/alarm_wake_custom.xml" value="0.2046875" />

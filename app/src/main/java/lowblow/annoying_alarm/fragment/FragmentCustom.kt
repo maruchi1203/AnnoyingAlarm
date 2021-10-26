@@ -1,25 +1,22 @@
 package lowblow.annoying_alarm.fragment
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isGone
 import lowblow.annoying_alarm.activity.AlarmSoundActivity
 import lowblow.annoying_alarm.R
-import lowblow.annoying_alarm.data.Mode
+import lowblow.annoying_alarm.data.AlarmType
 import lowblow.annoying_alarm.data.alarm.AlarmFragmentData
 import lowblow.annoying_alarm.databinding.FragmentCustomBinding
 
@@ -198,7 +195,7 @@ class FragmentCustom : FragmentParent() {
             isVibrate,
             loudness,
             isGentleAlarm,
-            Mode.FRAGMENT_CUSTOM
+            AlarmType.FRAGMENT_CUSTOM
         )
 
     }

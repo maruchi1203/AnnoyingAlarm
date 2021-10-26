@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import lowblow.annoying_alarm.R
 import lowblow.annoying_alarm.databinding.FragmentMosquitoBinding
@@ -38,17 +39,5 @@ class FragmentMosquito: FragmentParent() {
     }
 
     private fun initViews() {
-        initSpinner()
-    }
-
-    private fun initSpinner() {
-        val spinner = binding.alarmExitTypeSpinner
-        val spinnerArray = resources.getStringArray(R.array.alarm_exit_type)
-        val spinnerAdapter = ArrayAdapter(requireContext(), R.layout.support_simple_spinner_dropdown_item, spinnerArray)
-
-        spinner.adapter = spinnerAdapter
-
-
-
     }
 }

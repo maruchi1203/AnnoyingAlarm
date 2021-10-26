@@ -1,7 +1,7 @@
 package lowblow.annoying_alarm.fragment
 
 import androidx.fragment.app.Fragment
-import lowblow.annoying_alarm.data.Mode
+import lowblow.annoying_alarm.data.AlarmType
 import lowblow.annoying_alarm.data.alarm.AlarmFragmentData
 
 abstract class FragmentParent : Fragment() {
@@ -12,7 +12,7 @@ abstract class FragmentParent : Fragment() {
             false,
             0.toFloat(),
             false,
-            Mode.FRAGMENT_CUSTOM
+            AlarmType.FRAGMENT_CUSTOM
         )
     }
 

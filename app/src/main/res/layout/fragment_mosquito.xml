@@ -96,30 +96,4 @@
         app:layout_constraintStart_toStartOf="@id/alarmSoundLinearLayout"
         app:layout_constraintTop_toBottomOf="@id/alarmSoundControlTextView" />
 
-    <TextView
-        android:id="@+id/alarmMosquitoExitTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
-        android:text="종료 방법"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:drawableStartCompat="@drawable/ic_baseline_music_note_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/alarmSoundControlSeekBar" />
-
-    <Spinner
-        android:id="@+id/alarmExitTypeSpinner"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
-        app:layout_constraintEnd_toEndOf="@id/alarmSoundControlSeekBar"
-        app:layout_constraintStart_toStartOf="@id/alarmMosquitoExitTextView"
-        app:layout_constraintTop_toBottomOf="@id/alarmMosquitoExitTextView"
-        android:theme="@style/Widget.AppCompat.DropDownItem.Spinner"
-        />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

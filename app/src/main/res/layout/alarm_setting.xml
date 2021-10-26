@@ -182,6 +182,31 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/alarmChangeSpinner" />
 
+        <TextView
+            android:id="@+id/alarmEndTypeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:text="종료 방법"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_baseline_music_note_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/selectedModeFragmentView" />
+
+        <Spinner
+            android:id="@+id/alarmEndTypeSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            app:layout_constraintEnd_toEndOf="@id/alarmChangeSpinner"
+            app:layout_constraintStart_toStartOf="@id/alarmEndTypeTextView"
+            app:layout_constraintTop_toBottomOf="@id/alarmEndTypeTextView"
+            android:theme="@style/Widget.AppCompat.DropDownItem.Spinner"
+            />
+
         <EditText
             android:id="@+id/alarmMemoEditText"
             android:layout_width="0dp"
@@ -194,7 +219,7 @@
             android:singleLine="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/selectedModeFragmentView" />
+            app:layout_constraintTop_toBottomOf="@id/alarmEndTypeSpinner" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/saveButton"

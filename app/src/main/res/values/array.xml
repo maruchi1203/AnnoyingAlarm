@@ -16,5 +16,6 @@
     <string-array name="alarm_exit_type">
         <item>버튼</item>
         <item>흔들기</item>
+        <item>받아쓰기</item>
     </string-array>
 </resources>

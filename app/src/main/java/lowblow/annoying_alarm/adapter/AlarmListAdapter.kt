@@ -6,13 +6,8 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
-import android.os.Build
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -20,14 +15,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import lowblow.annoying_alarm.activity.AlarmSettingActivity
-import lowblow.annoying_alarm.data.Mode
+import lowblow.annoying_alarm.data.AlarmType
 import lowblow.annoying_alarm.system_manager.PreferenceManager
 import lowblow.annoying_alarm.data.alarm.AlarmEntity
 import lowblow.annoying_alarm.databinding.ItemAlarmBinding
 import lowblow.annoying_alarm.system_manager.AlarmController
 import lowblow.annoying_alarm.system_manager.DataController
-import java.io.Serializable
-import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.pow
 
@@ -42,11 +35,11 @@ class AlarmListAdapter(
             val imageView = binding.alarmImageView
 
             // 알람 종류 표시
-            binding.alarmItemModeTextView.text = when (entity.mode) {
-                Mode.FRAGMENT_CUSTOM -> "커스텀 알람"
-                Mode.FRAGMENT_SIREN -> "사이렌"
-                Mode.FRAGMENT_MESSENGER -> "메신저"
-                Mode.FRAGMENT_MOSQUITO -> "모기 습격"
+            binding.alarmItemModeTextView.text = when (entity.alarmType) {
+                AlarmType.FRAGMENT_CUSTOM -> "커스텀 알람"
+                AlarmType.FRAGMENT_SIREN -> "사이렌"
+                AlarmType.FRAGMENT_MESSENGER -> "메신저"
+                AlarmType.FRAGMENT_MOSQUITO -> "모기 습격"
             }
 
             //알람 작동 유무 표시
