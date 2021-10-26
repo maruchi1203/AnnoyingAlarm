@@ -5,3 +5,6 @@
 포트폴리오지만 진심으로 스트레스 받아서 만들어보는 알람앱
 
 ![화면 캡처 2021-10-13 121249](https://user-images.githubusercontent.com/56828107/137060893-92496620-b9dc-4bd7-9caf-b1f836b70826.jpg)
+
+자료 출처)
+https://pixabay.com/ko/vectors/%eb%aa%a8%ea%b8%b0-%ea%b3%a4%ec%b6%a9-%ec%8b%a4%eb%a3%a8%ec%97%a3-%ec%97%90%eb%8d%b0%ec%8a%a4-3643252/
