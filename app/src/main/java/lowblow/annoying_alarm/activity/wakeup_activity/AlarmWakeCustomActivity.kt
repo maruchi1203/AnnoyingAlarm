@@ -18,7 +18,7 @@ import lowblow.annoying_alarm.system_manager.DataController
 import java.lang.Exception
 import kotlin.concurrent.thread
 
-class AlarmWakeUpActivity : AppCompatActivity() {
+class AlarmWakeCustomActivity : AppCompatActivity() {
 
     private val binding by lazy {
         AlarmWakeCustomBinding.inflate(layoutInflater)
@@ -28,7 +28,7 @@ class AlarmWakeUpActivity : AppCompatActivity() {
     private val vibrate by lazy {
         getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
     }
-    private lateinit var data: AlarmEntity
+    private lateinit var alarmEntity: AlarmEntity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,13 +39,14 @@ class AlarmWakeUpActivity : AppCompatActivity() {
         initWakeLock()
 
         CoroutineScope(Dispatchers.Main).launch {
-            data = DataController(this@AlarmWakeUpActivity).getAlarmData(id)!!
+            alarmEntity = DataController(this@AlarmWakeCustomActivity).getAlarmData(id)!!
             initSound()
             initSnoozeButton()
             initExitButton()
         }
     }
 
+    //뒤로가기 방지
     override fun onBackPressed() {}
 
     private fun initWakeLock() {
@@ -66,22 +67,22 @@ class AlarmWakeUpActivity : AppCompatActivity() {
     }
 
     private fun initSound() {
-        if (data.alarmUri != null) {
+        if (alarmEntity.alarmUri != null) {
             media.setAudioAttributes(
                 AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_ALARM)
                     .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                     .build()
             )
-            media.setDataSource(this, Uri.parse(data.alarmUri))
+            media.setDataSource(this, Uri.parse(alarmEntity.alarmUri))
             media.isLooping = true
             media.prepare()
             media.start()
 
-            if (data.gentleAlarm) {
+            if (alarmEntity.gentleAlarm) {
                 try {
                     thread(true) {
-                        for (i in 0..(data.loudness * 100).toInt()) {
+                        for (i in 0..(alarmEntity.loudness * 100).toInt()) {
                             media.setVolume(i.toFloat() / 100, i.toFloat() / 100)
 
                             Thread.sleep(1000)
@@ -90,11 +91,11 @@ class AlarmWakeUpActivity : AppCompatActivity() {
                 }
                 catch (e : Exception) {}
             } else {
-                media.setVolume(data.loudness, data.loudness)
+                media.setVolume(alarmEntity.loudness, alarmEntity.loudness)
             }
         }
 
-        if (data.vibration) {
+        if (alarmEntity.vibration) {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
                 vibrate.vibrate(1000)
             } else {
@@ -114,7 +115,6 @@ class AlarmWakeUpActivity : AppCompatActivity() {
             media.release()
             vibrate.cancel()
 
-
             finish()
         }
     }
@@ -124,10 +124,10 @@ class AlarmWakeUpActivity : AppCompatActivity() {
             media.release()
             vibrate.cancel()
 
-            if (data.days == 0) {
-                DataController(this).alarmDataDelete(data)
+            if (alarmEntity.days == 0) {
+                DataController(this).alarmDataDelete(alarmEntity)
             } else {
-                AlarmController(this).setAlarm(data.id, data)
+                AlarmController(this).setAlarm(alarmEntity.id, alarmEntity)
             }
 
             finish()

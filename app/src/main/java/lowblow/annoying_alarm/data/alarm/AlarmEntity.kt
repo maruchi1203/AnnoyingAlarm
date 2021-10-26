@@ -3,7 +3,6 @@ package lowblow.annoying_alarm.data.alarm
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import lowblow.annoying_alarm.data.AlarmEndMode
 import lowblow.annoying_alarm.data.AlarmType
 
 @Entity
@@ -18,6 +17,5 @@ data class AlarmEntity(
     @ColumnInfo(name = "loudness") var loudness: Float,
     @ColumnInfo(name = "gentle") var gentleAlarm: Boolean,
     @ColumnInfo(name = "memo") var memo: String,
-    @ColumnInfo(name = "type") var alarmType: AlarmType,
-    @ColumnInfo(name = "endMode") var endMode : AlarmEndMode
+    @ColumnInfo(name = "type") var alarmType: AlarmType
 )

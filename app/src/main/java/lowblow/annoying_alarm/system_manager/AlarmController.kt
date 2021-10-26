@@ -51,6 +51,7 @@ class AlarmController(private val context: Context) {
 
         val bundle = Bundle()
         bundle.putLong("id", id)
+        bundle.putInt("alarmType", alarmEntity.alarmType.ordinal)
 
         intent.putExtras(bundle)
 

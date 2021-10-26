@@ -12,7 +12,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import lowblow.annoying_alarm.R
-import lowblow.annoying_alarm.data.AlarmEndMode
 import lowblow.annoying_alarm.data.alarm.AlarmEntity
 import lowblow.annoying_alarm.databinding.AlarmSettingBinding
 import lowblow.annoying_alarm.fragment.*
@@ -40,9 +39,6 @@ class AlarmSettingActivity : AppCompatActivity() {
     //Fragment variables
     private var fragmentPos: Int = 0
     private val fragmentManager = supportFragmentManager
-
-    //AlarmEndType variables
-    private var alarmEndMode : AlarmEndMode = AlarmEndMode.BUTTON
 
     //PreferenceValue
     private val is24Hour by lazy {
@@ -86,7 +82,6 @@ class AlarmSettingActivity : AppCompatActivity() {
         initDaysList()
         initAlarmSpinner()
         initSaveButton()
-        initAlarmEndTypeSpinner()
     }
 
     private fun initTimePicker() {
@@ -227,27 +222,6 @@ class AlarmSettingActivity : AppCompatActivity() {
         }
     }
 
-    private fun initAlarmEndTypeSpinner() {
-        val spinner = binding.alarmEndTypeSpinner
-        val spinnerArray = resources.getStringArray(R.array.alarm_exit_type)
-        val spinnerAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, spinnerArray)
-
-        spinner.adapter = spinnerAdapter
-
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                alarmEndMode = when(position) {
-                    0 -> AlarmEndMode.BUTTON
-                    1 -> AlarmEndMode.SHAKING
-                    2 -> AlarmEndMode.WRITING
-                    else -> AlarmEndMode.BUTTON
-                }
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {}
-        }
-    }
-
     private fun initSaveButton() {
         alarmSaveButton.setOnClickListener { _ ->
             val entityId: Long = intent.getLongExtra("id", 0)
@@ -267,8 +241,7 @@ class AlarmSettingActivity : AppCompatActivity() {
                         data.loudness,
                         data.gentleAlarm,
                         binding.alarmMemoEditText.text.toString(),
-                        data.alarmType,
-                        alarmEndMode
+                        data.alarmType
                     )
                 )
 
@@ -286,8 +259,7 @@ class AlarmSettingActivity : AppCompatActivity() {
                         data.loudness,
                         data.gentleAlarm,
                         binding.alarmMemoEditText.text.toString(),
-                        data.alarmType,
-                        alarmEndMode
+                        data.alarmType
                     )
                 )
 
