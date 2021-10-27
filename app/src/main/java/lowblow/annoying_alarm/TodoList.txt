@@ -31,3 +31,6 @@ AlarmListAdapter
  -AlarmSettingActivity 버그 수정
  -FragmentCustom 벨소리, 음악에 아무 것도 없을 시에 Toast
  -FragmentMosquito 센서매니저 추가
+
+2021년 10월 27일
+ -알람 소리, 진동을 NotificationChannel 로 변경

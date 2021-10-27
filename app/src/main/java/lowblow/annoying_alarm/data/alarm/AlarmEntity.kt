@@ -4,9 +4,10 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import lowblow.annoying_alarm.data.AlarmType
+import java.io.Serializable
 
 @Entity
-data class AlarmEntity(
+data class AlarmEntity (
     @PrimaryKey(autoGenerate = true) var id: Long = 0,
     @ColumnInfo(name = "activated") var activated: Boolean,
     @ColumnInfo(name = "hour") var hour: Int,
