@@ -165,7 +165,6 @@ class FragmentMosquito : FragmentParent() {
             selectedUri.toString(),
             isVibrate,
             loudness,
-            false,
             AlarmType.FRAGMENT_MOSQUITO
         )
 

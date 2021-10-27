@@ -113,7 +113,7 @@ class AlarmSettingActivity : AppCompatActivity() {
                     daysSave += daysBit
                 } else {
                     view.setBackgroundResource(R.drawable.button_unselected)
-                    daysSave = daysBit
+                    daysSave -= daysBit
                 }
             }
         }
@@ -217,7 +217,9 @@ class AlarmSettingActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
 
         }
     }
@@ -238,10 +240,10 @@ class AlarmSettingActivity : AppCompatActivity() {
                         daysSave,
                         data.alarmUri,
                         data.vibration,
-                        data.loudness,
-                        data.gentleAlarm,
+                        data.volume,
                         binding.alarmMemoEditText.text.toString(),
-                        data.alarmType
+                        data.alarmType,
+                        false
                     )
                 )
 
@@ -256,10 +258,10 @@ class AlarmSettingActivity : AppCompatActivity() {
                         daysSave,
                         data.alarmUri,
                         data.vibration,
-                        data.loudness,
-                        data.gentleAlarm,
+                        data.volume,
                         binding.alarmMemoEditText.text.toString(),
-                        data.alarmType
+                        data.alarmType,
+                        false
                     )
                 )
 

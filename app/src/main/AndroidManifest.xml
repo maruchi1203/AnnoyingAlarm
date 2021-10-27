@@ -21,9 +21,9 @@
         android:theme="@style/Theme.Motivated"
         tools:ignore="AllowBackup">
 
-        <activity
-            android:name="lowblow.annoying_alarm.activity.MainActivity"
-            tools:ignore="IntentFilterExportedReceiver">
+
+
+        <activity android:name="lowblow.annoying_alarm.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,6 +31,7 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activity.PermissionActivity" />
         <activity android:name="lowblow.annoying_alarm.activity.AlarmSettingActivity" />
         <activity android:name="lowblow.annoying_alarm.activity.AlarmSoundActivity" />
         <activity
@@ -52,7 +53,8 @@
             android:turnScreenOn="true"
             tools:ignore="LockedOrientationActivity,UnusedAttribute" />
 
-        <receiver android:name="lowblow.annoying_alarm.receiver.AlarmReceiver">
+        <receiver android:name="lowblow.annoying_alarm.receiver.AlarmReceiver"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.sec" />
             </intent-filter>

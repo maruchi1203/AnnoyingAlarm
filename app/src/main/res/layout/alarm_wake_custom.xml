@@ -41,21 +41,6 @@
         tools:ignore="HardcodedText" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/alarmSnoozeButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="12dp"
-        android:background="@color/black"
-        android:text="5분만 더..."
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/alarmWakeCustomCloseButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/alarmWakeCustomCloseButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

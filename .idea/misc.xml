@@ -4,7 +4,6 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AnnoyingAlarm/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.38229166666666664" />
-        <entry key="..\:/AnnoyingAlarm/app/src/main/res/drawable/background_thin_stroke.xml" value="0.22083333333333333" />
         <entry key="..\:/AnnoyingAlarm/app/src/main/res/drawable/button_selected.xml" value="0.38229166666666664" />
         <entry key="..\:/AnnoyingAlarm/app/src/main/res/drawable/button_unselected.xml" value="0.38229166666666664" />
         <entry key="..\:/AnnoyingAlarm/app/src/main/res/drawable/ic_baseline_add_28.xml" value="0.38229166666666664" />
@@ -13,18 +12,22 @@
         <entry key="..\:/AnnoyingAlarm/app/src/main/res/drawable/ic_baseline_alarm_on_128.xml" value="0.38229166666666664" />
         <entry key="..\:/AnnoyingAlarm/app/src/main/res/drawable/ic_baseline_alarm_on_24.xml" value="0.38229166666666664" />
         <entry key="..\:/AnnoyingAlarm/app/src/main/res/drawable/ic_launcher_background.xml" value="0.38229166666666664" />
-        <entry key="..\:/AnnoyingAlarm/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.38229166666666664" />
         <entry key="..\:/AnnoyingAlarm/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/AnnoyingAlarm/app/src/main/res/layout/alarm_setting.xml" value="0.36614583333333334" />
         <entry key="..\:/AnnoyingAlarm/app/src/main/res/layout/alarm_wake_custom.xml" value="0.2046875" />
         <entry key="..\:/AnnoyingAlarm/app/src/main/res/layout/fragment_custom.xml" value="0.36614583333333334" />
         <entry key="..\:/AnnoyingAlarm/app/src/main/res/layout/fragment_mosquito.xml" value="0.36614583333333334" />
-        <entry key="..\:/AnnoyingAlarm/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.38229166666666664" />
-        <entry key="..\:/AnnoyingAlarm/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/AnnoyingAlarm/app/src/main/res/drawable/ic_android_black_48dp.xml" value="0.21979166666666666" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/AnnoyingAlarm/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.378125" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/AnnoyingAlarm/app/src/main/res/drawable/ic_mosquito_3643252.xml" value="0.75" />
         <entry key="..\:/Users/maruc/AndroidStudioProjects/AnnoyingAlarm/app/src/main/res/layout/activity_choose_alarm_sound.xml" value="0.13055555555555556" />
         <entry key="..\:/Users/maruc/AndroidStudioProjects/AnnoyingAlarm/app/src/main/res/layout/activity_main.xml" value="0.1736111111111111" />
-        <entry key="..\:/Users/maruc/AndroidStudioProjects/AnnoyingAlarm/app/src/main/res/layout/alarm_setting.xml" value="0.17395833333333333" />
-        <entry key="..\:/Users/maruc/AndroidStudioProjects/AnnoyingAlarm/app/src/main/res/layout/fragment_custom.xml" value="0.20532319391634982" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/AnnoyingAlarm/app/src/main/res/layout/activity_permission.xml" value="0.33" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/AnnoyingAlarm/app/src/main/res/layout/alarm_setting.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/AnnoyingAlarm/app/src/main/res/layout/alarm_wake_custom.xml" value="0.20364583333333333" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/AnnoyingAlarm/app/src/main/res/layout/alarm_wake_mosquito.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/AnnoyingAlarm/app/src/main/res/layout/fragment_custom.xml" value="0.33" />
+        <entry key="..\:/Users/maruc/AndroidStudioProjects/AnnoyingAlarm/app/src/main/res/layout/fragment_mosquito.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/maruc/AndroidStudioProjects/AnnoyingAlarm/app/src/main/res/layout/item_alarm.xml" value="0.24409722222222222" />
         <entry key="..\:/Users/maruc/AndroidStudioProjects/AnnoyingAlarm/app/src/main/res/layout/item_alarm_sound.xml" value="0.2046875" />
         <entry key="..\:/Users/maruc/AndroidStudioProjects/Motivated/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.14722222222222223" />

@@ -96,44 +96,13 @@
         app:layout_constraintStart_toStartOf="@id/alarmSoundLinearLayout"
         app:layout_constraintTop_toBottomOf="@id/alarmSoundControlTextView" />
 
-    <LinearLayout
-        android:id="@+id/alarmGentleSoundLinearLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/alarmSoundLinearLayout"
-        app:layout_constraintEnd_toEndOf="@id/alarmSoundLinearLayout"
-        app:layout_constraintTop_toBottomOf="@id/alarmSoundControlSeekBar"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/alarmGentleSoundTextView"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="부드러운 알람"
-            android:gravity="start|center"
-            android:textColor="@color/black"
-            android:layout_weight="1"
-            android:paddingStart="16dp"
-            app:layout_constraintStart_toStartOf="@id/alarmSoundControlSeekBar"
-            app:layout_constraintTop_toBottomOf="@id/alarmSoundControlSeekBar"
-            tools:ignore="RtlSymmetry" />
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/alarmGentleSoundSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="14dp"/>
-        
-    </LinearLayout>
-
     <View
         android:id="@+id/clickBlockingView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/alarmSoundControlSeekBar"
-        app:layout_constraintBottom_toBottomOf="@id/alarmGentleSoundLinearLayout" />
+        app:layout_constraintTop_toTopOf="@id/alarmSoundControlTextView"
+        app:layout_constraintBottom_toBottomOf="@id/alarmSoundControlSeekBar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

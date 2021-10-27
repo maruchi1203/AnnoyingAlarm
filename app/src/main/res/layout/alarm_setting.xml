@@ -181,7 +181,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/alarmChangeSpinner" />
-            />
 
         <EditText
             android:id="@+id/alarmMemoEditText"
@@ -196,7 +195,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/selectedModeFragmentView"
-            android:autofillHints="" />
+            android:autofillHints=""
+            tools:ignore="HardcodedText,TextFields" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/saveButton"

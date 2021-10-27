@@ -20,7 +20,19 @@ class AlarmController(private val context: Context) {
     private val intent = Intent(context, AlarmReceiver::class.java)
 
     @SuppressLint("SimpleDateFormat", "UnspecifiedImmutableFlag")
-    fun setAlarm(id: Long, alarmEntity: AlarmEntity) {
+    fun setAlarmState(id: Long, alarmEntity: AlarmEntity) {
+        if(alarmEntity.activated) {
+            if (alarmEntity.snooze)
+                setSnooze(id)
+            else
+                setNext(id, alarmEntity)
+        } else {
+            cancelAlarm(id)
+        }
+    }
+
+    @SuppressLint("UnspecifiedImmutableFlag")
+    private fun setNext(id: Long, alarmEntity: AlarmEntity) {
         //알람에 맞춰져있는 시간으로 설정
         val calendar = Calendar.getInstance().apply {
             timeInMillis = System.currentTimeMillis()
@@ -62,28 +74,27 @@ class AlarmController(private val context: Context) {
             PendingIntent.FLAG_UPDATE_CURRENT
         )
 
-        alarmManager.setAndAllowWhileIdle(
+        alarmManager.setExactAndAllowWhileIdle(
             AlarmManager.RTC_WAKEUP,
             calendar.timeInMillis,
             pendingIntent
         )
-
     }
 
     @SuppressLint("UnspecifiedImmutableFlag")
-    fun snoozeAlarm() {
+    private fun setSnooze(id: Long) {
         val intent = Intent(context, AlarmReceiver::class.java)
 
-        val trigger = (SystemClock.elapsedRealtime() + 60 * 1000 * 5)
+        val trigger = (SystemClock.elapsedRealtime() + 60 * 1000 * 1)
 
         val pendingIntent = PendingIntent.getBroadcast(
             context.applicationContext,
-            SNOOZE_ALARM_CODE,
+            id.toInt(),
             intent,
             PendingIntent.FLAG_UPDATE_CURRENT
         )
 
-        alarmManager.setAndAllowWhileIdle(
+        alarmManager.setExactAndAllowWhileIdle(
             AlarmManager.ELAPSED_REALTIME_WAKEUP,
             trigger,
             pendingIntent
@@ -91,18 +102,14 @@ class AlarmController(private val context: Context) {
     }
 
     @SuppressLint("UnspecifiedImmutableFlag")
-    fun cancelAlarm(alarmEntity: AlarmEntity) {
+    private fun cancelAlarm(id: Long) {
         val pendingIntent = PendingIntent.getBroadcast(
             context.applicationContext,
-            alarmEntity.id.toInt(),
+            id.toInt(),
             intent,
             PendingIntent.FLAG_UPDATE_CURRENT
         )
 
         alarmManager.cancel(pendingIntent)
-    }
-
-    companion object {
-        const val SNOOZE_ALARM_CODE = -1
     }
 }

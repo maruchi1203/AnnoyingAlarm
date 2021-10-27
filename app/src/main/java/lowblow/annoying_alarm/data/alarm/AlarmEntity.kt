@@ -15,8 +15,8 @@ data class AlarmEntity (
     @ColumnInfo(name = "days") var days: Int,
     @ColumnInfo(name = "uri") var alarmUri: String?,
     @ColumnInfo(name = "vibration") var vibration: Boolean,
-    @ColumnInfo(name = "loudness") var loudness: Float,
-    @ColumnInfo(name = "gentle") var gentleAlarm: Boolean,
+    @ColumnInfo(name = "volume") var volume: Float,
     @ColumnInfo(name = "memo") var memo: String,
-    @ColumnInfo(name = "type") var alarmType: AlarmType
+    @ColumnInfo(name = "type") var alarmType: AlarmType,
+    @ColumnInfo(name = "snooze") var snooze: Boolean
 )

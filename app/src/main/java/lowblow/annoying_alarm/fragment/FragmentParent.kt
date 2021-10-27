@@ -11,7 +11,6 @@ abstract class FragmentParent : Fragment() {
             null,
             false,
             0.toFloat(),
-            false,
             AlarmType.FRAGMENT_CUSTOM
         )
     }

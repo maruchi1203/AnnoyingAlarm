@@ -2,12 +2,13 @@ package lowblow.annoying_alarm.activity
 
 import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +16,7 @@ import kotlinx.coroutines.launch
 import lowblow.annoying_alarm.adapter.AlarmListAdapter
 import lowblow.annoying_alarm.databinding.ActivityMainBinding
 import lowblow.annoying_alarm.system_manager.DataController
-import lowblow.annoying_alarm.system_manager.PreferenceManager
+import java.security.Permission
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -28,10 +29,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        initSetting()
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        initSetting()
         initAlarmButton()
 
         binding.alarmRecyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
@@ -46,21 +49,25 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun initSetting() {
-        ActivityCompat.requestPermissions(
-            this, arrayOf(
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ),
-            MODE_PRIVATE
-        )
+    override fun onRestart() {
+        super.onRestart()
 
-        if (!Settings.canDrawOverlays(this)) {
-            Toast.makeText(this, "다른 앱 위에 그리기를 허용해주세요", Toast.LENGTH_SHORT).show()
-            val uri = Uri.fromParts("package", packageName, null)
-            val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, uri)
-            startActivity(intent)
+        if(checkPermission()) {
             finish()
         }
+    }
+
+    private fun initSetting() {
+        if (checkPermission()) {
+            startActivity(Intent(this, PermissionActivity::class.java))
+        }
+    }
+
+    private fun checkPermission(): Boolean {
+        return !Settings.canDrawOverlays(this) or (ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        ) != PackageManager.PERMISSION_GRANTED)
     }
 
     private fun initAlarmButton() {

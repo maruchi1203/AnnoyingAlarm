@@ -39,7 +39,7 @@ class DataController(val context: Context) {
 
         CoroutineScope(Dispatchers.IO).launch {
             val id = database!!.alarmDao().insertAlarm(alarmEntity)
-            AlarmController(context).setAlarm(id, alarmEntity)
+            AlarmController(context).setAlarmState(id, alarmEntity)
         }
 
     }
@@ -47,17 +47,18 @@ class DataController(val context: Context) {
     fun alarmDataUpdate(alarmEntity: AlarmEntity) {
 
         CoroutineScope(Dispatchers.IO).launch {
+            alarmEntity.activated = true
             database!!.alarmDao().updateAlarm(alarmEntity)
-            AlarmController(context).setAlarm(alarmEntity.id, alarmEntity)
+            AlarmController(context).setAlarmState(alarmEntity.id, alarmEntity)
         }
-
     }
 
     fun alarmDataDelete(alarmEntity: AlarmEntity) {
 
         CoroutineScope(Dispatchers.IO).launch {
+            alarmEntity.activated = false
             database!!.alarmDao().deleteAlarm(alarmEntity)
-            AlarmController(context).cancelAlarm(alarmEntity)
+            AlarmController(context).setAlarmState(alarmEntity.id, alarmEntity)
         }
 
     }

@@ -37,22 +37,25 @@ class AlarmListAdapter(
             // 알람 종류 표시
             binding.alarmItemModeTextView.text = when (entity.alarmType) {
                 AlarmType.FRAGMENT_CUSTOM -> "커스텀 알람"
+                AlarmType.FRAGMENT_MOSQUITO -> "모기 습격"
                 AlarmType.FRAGMENT_SIREN -> "사이렌"
                 AlarmType.FRAGMENT_MESSENGER -> "메신저"
-                AlarmType.FRAGMENT_MOSQUITO -> "모기 습격"
             }
 
             //알람 작동 유무 표시
             imageView.setOnClickListener {
-                if (entity.activated) {
-                    imageView.setColorFilter(Color.parseColor("#ffcccccc"), PorterDuff.Mode.SRC_IN)
-                    entity.activated = false
-                    AlarmController(context).cancelAlarm(entity)
+                if(entity.snooze) {
+                    entity.snooze = false
                 } else {
-                    imageView.setColorFilter(Color.parseColor("#ff000000"), PorterDuff.Mode.SRC_IN)
-                    entity.activated = true
-                    AlarmController(context).setAlarm(entity.id, entity)
+                    if (entity.activated) {
+                        imageView.setColorFilter(Color.parseColor("#ffcccccc"), PorterDuff.Mode.SRC_IN)
+                        entity.activated = false
+                    } else {
+                        imageView.setColorFilter(Color.parseColor("#ff000000"), PorterDuff.Mode.SRC_IN)
+                        entity.activated = true
+                    }
                 }
+                DataController(context).alarmDataUpdate(entity)
             }
 
             //알람 클릭시 업데이트 화면 작동
@@ -87,19 +90,23 @@ class AlarmListAdapter(
             binding.alarmTitleTextView.text = if (entity.memo == "") "알람" else entity.memo
 
             //알람 시간 표시
-            binding.alarmTimeTextView.text =
-                if (PreferenceManager(context.applicationContext).getBoolean("is24hour")) {
-                    "%s %02d : %02d".format(
-                        (if (entity.hour < 12) "오전" else "오후"),
-                        (if (entity.hour % 12 == 0) 12 else entity.hour % 12),
-                        entity.minute
-                    )
+            binding.alarmTimeTextView.text = if(entity.snooze) {
+                    "1분 내로 실행"
                 } else {
-                    "%02d : %02d".format(
-                        entity.hour,
-                        entity.minute
-                    )
+                    if (PreferenceManager(context.applicationContext).getBoolean("is24hour")) {
+                        "%s %02d : %02d".format(
+                            (if (entity.hour < 12) "오전" else "오후"),
+                            (if (entity.hour % 12 == 0) 12 else entity.hour % 12),
+                            entity.minute
+                        )
+                    } else {
+                        "%02d : %02d".format(
+                            entity.hour,
+                            entity.minute
+                        )
+                    }
                 }
+
 
             //알람 반복 요일, 작동 시간 표시
             bindDaysTextView(binding, entity)
@@ -108,40 +115,42 @@ class AlarmListAdapter(
 
     @SuppressLint("SetTextI18n")
     fun bindDaysTextView(binding: ItemAlarmBinding, entity: AlarmEntity) {
-        val daysText = binding.alarmDaysTextView
+        binding.alarmDaysTextView.text = if(entity.snooze) {
+            "종료하려면 좌측의 알람 버튼 클릭"
+        } else {
+            when (entity.days) {
+                0 -> {
+                    val millis = System.currentTimeMillis()
+                    val alarmCalendar = Calendar.getInstance().apply {
+                        timeInMillis = millis
+                        set(Calendar.HOUR_OF_DAY, entity.hour)
+                        set(Calendar.MINUTE, entity.minute)
+                        set(Calendar.SECOND, 0)
+                    }
 
-        when (entity.days) {
-            0 -> {
-                val millis = System.currentTimeMillis()
-                val alarmCalendar = Calendar.getInstance().apply {
-                    timeInMillis = millis
-                    set(Calendar.HOUR_OF_DAY, entity.hour)
-                    set(Calendar.MINUTE, entity.minute)
-                    set(Calendar.SECOND, 0)
+                    if (millis > alarmCalendar.timeInMillis) "내일 실행" else "오늘 실행"
+
                 }
-
-                daysText.text = if (millis > alarmCalendar.timeInMillis) "내일 실행" else "오늘 실행"
-
-            }
-            127 -> {
-                daysText.text = "매일"
-            }
-            else -> {
-                var tempDaysText = ""
-                for (i in 0 until 7) {
-                    if ((entity.days and (2.0).pow(i).toInt()) != 0) {
-                        when (i) {
-                            0 -> tempDaysText += " 일"
-                            1 -> tempDaysText += " 월"
-                            2 -> tempDaysText += " 화"
-                            3 -> tempDaysText += " 수"
-                            4 -> tempDaysText += " 목"
-                            5 -> tempDaysText += " 금"
-                            6 -> tempDaysText += " 토"
+                127 -> {
+                    "매일"
+                }
+                else -> {
+                    var tempDaysText = ""
+                    for (i in 0 until 7) {
+                        if ((entity.days and (2.0).pow(i).toInt()) != 0) {
+                            when (i) {
+                                0 -> tempDaysText += " 일"
+                                1 -> tempDaysText += " 월"
+                                2 -> tempDaysText += " 화"
+                                3 -> tempDaysText += " 수"
+                                4 -> tempDaysText += " 목"
+                                5 -> tempDaysText += " 금"
+                                6 -> tempDaysText += " 토"
+                            }
                         }
                     }
+                    tempDaysText
                 }
-                daysText.text = tempDaysText
             }
         }
     }

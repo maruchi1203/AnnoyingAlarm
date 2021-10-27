@@ -36,10 +36,8 @@ class FragmentCustom : FragmentParent() {
 
     //For AlarmFragmentData
     private var selectedUri: Uri? = null
-    private var loudness: Float = 1.toFloat()
+    private var volume: Float = 1.toFloat()
     private var isVibrate = true
-    private var isGentleAlarm = false
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,8 +49,7 @@ class FragmentCustom : FragmentParent() {
         initMusicChangeButton()
         initAlarmPlayTestButton()
         initVibrationSwitch()
-        initSeekbar()
-        initGentleAlarm()
+        initVolumeChangeSeekBar()
 
         return binding.root
     }
@@ -113,12 +110,10 @@ class FragmentCustom : FragmentParent() {
         if (isExisting) {
             binding.alarmSoundControlTextView.alpha = 1f
             binding.alarmSoundControlSeekBar.alpha = 1f
-            binding.alarmGentleSoundLinearLayout.alpha = 1f
             binding.alarmPlayTestButton.isGone = false
         } else {
             binding.alarmSoundControlTextView.alpha = 0.1f
             binding.alarmSoundControlSeekBar.alpha = 0.1f
-            binding.alarmGentleSoundLinearLayout.alpha = 0.1f
             binding.alarmPlayTestButton.isGone = true
         }
     }
@@ -130,7 +125,7 @@ class FragmentCustom : FragmentParent() {
                 if (selectedUri != null) {
                     media.setAudioAttributes(
                         AudioAttributes.Builder()
-                            .setUsage(AudioAttributes.USAGE_MEDIA)
+                            .setUsage(AudioAttributes.USAGE_ALARM)
                             .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                             .build()
                     )
@@ -162,16 +157,16 @@ class FragmentCustom : FragmentParent() {
         }
     }
 
-    private fun initSeekbar() {
+    private fun initVolumeChangeSeekBar() {
         binding.alarmSoundControlSeekBar.progress = 100
-        loudness = binding.alarmSoundControlSeekBar.progress.toFloat() / 100
-        media.setVolume(loudness, loudness)
+        volume = binding.alarmSoundControlSeekBar.progress.toFloat() / 100
+        media.setVolume(volume, volume)
 
         binding.alarmSoundControlSeekBar.setOnSeekBarChangeListener(object :
             SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                loudness = progress.toFloat() / 100
-                media.setVolume(loudness, loudness)
+                volume = progress.toFloat() / 100
+                media.setVolume(volume, volume)
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
@@ -182,19 +177,12 @@ class FragmentCustom : FragmentParent() {
         })
     }
 
-    private fun initGentleAlarm() {
-        binding.alarmGentleSoundSwitch.setOnCheckedChangeListener { _, isChecked ->
-            isGentleAlarm = isChecked
-        }
-    }
-
     override fun getData(): AlarmFragmentData {
 
         return AlarmFragmentData(
             selectedUri?.toString(),
             isVibrate,
-            loudness,
-            isGentleAlarm,
+            volume,
             AlarmType.FRAGMENT_CUSTOM
         )
 

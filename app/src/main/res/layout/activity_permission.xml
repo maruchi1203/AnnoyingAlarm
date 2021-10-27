@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/permissionTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:drawableStart="@drawable/ic_android_black_24dp"
+        android:drawablePadding="12dp"
+        android:paddingHorizontal="12dp"
+        android:text="권한 설정"
+        android:textColor="@color/black"
+        android:textSize="28sp" />
+
+    <TextView
+        android:id="@+id/drawOverlayTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:paddingHorizontal="12dp"
+        android:text="다른 앱 위에 그리기  -  알람을 작동시키기 위한 권한"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/drawOverlayButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/background_thin_stroke"
+        android:padding="8dp"
+        android:text="여기를 클릭하면 권한 설정으로 넘어갑니다"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/readExternalTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:paddingHorizontal="12dp"
+        android:text="외부 저장소 읽기  -  음원 파일을 불러오기 위한 권한"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/readExternalButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/background_thin_stroke"
+        android:padding="8dp"
+        android:text="여기를 클릭하면 권한 설정으로 넘어갑니다"
+        android:textSize="15sp" />
+
+</LinearLayout>

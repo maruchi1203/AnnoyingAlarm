@@ -1,6 +1,5 @@
 package lowblow.annoying_alarm.activity.wakeup_activity
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.media.AudioAttributes
 import android.media.MediaPlayer
@@ -15,8 +14,6 @@ import lowblow.annoying_alarm.data.alarm.AlarmEntity
 import lowblow.annoying_alarm.databinding.AlarmWakeCustomBinding
 import lowblow.annoying_alarm.system_manager.AlarmController
 import lowblow.annoying_alarm.system_manager.DataController
-import java.lang.Exception
-import kotlin.concurrent.thread
 
 class AlarmWakeCustomActivity : AppCompatActivity() {
 
@@ -41,13 +38,27 @@ class AlarmWakeCustomActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             alarmEntity = DataController(this@AlarmWakeCustomActivity).getAlarmData(id)!!
             initSound()
-            initSnoozeButton()
             initExitButton()
         }
     }
 
     //뒤로가기 방지
     override fun onBackPressed() {}
+
+    override fun onPause() {
+        super.onPause()
+
+        alarmEntity.snooze = true
+        DataController(this).alarmDataUpdate(alarmEntity)
+        finish()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        media.release()
+        vibrate.cancel()
+    }
 
     private fun initWakeLock() {
         window.addFlags(
@@ -78,21 +89,6 @@ class AlarmWakeCustomActivity : AppCompatActivity() {
             media.isLooping = true
             media.prepare()
             media.start()
-
-            if (alarmEntity.gentleAlarm) {
-                try {
-                    thread(true) {
-                        for (i in 0..(alarmEntity.loudness * 100).toInt()) {
-                            media.setVolume(i.toFloat() / 100, i.toFloat() / 100)
-
-                            Thread.sleep(1000)
-                        }
-                    }
-                }
-                catch (e : Exception) {}
-            } else {
-                media.setVolume(alarmEntity.loudness, alarmEntity.loudness)
-            }
         }
 
         if (alarmEntity.vibration) {
@@ -108,26 +104,13 @@ class AlarmWakeCustomActivity : AppCompatActivity() {
 
     }
 
-    @SuppressLint("UnspecifiedImmutableFlag")
-    private fun initSnoozeButton() {
-        binding.alarmSnoozeButton.setOnClickListener {
-            AlarmController(this).snoozeAlarm()
-            media.release()
-            vibrate.cancel()
-
-            finish()
-        }
-    }
-
     private fun initExitButton() {
         binding.alarmWakeCustomCloseButton.setOnClickListener {
-            media.release()
-            vibrate.cancel()
-
             if (alarmEntity.days == 0) {
                 DataController(this).alarmDataDelete(alarmEntity)
             } else {
-                AlarmController(this).setAlarm(alarmEntity.id, alarmEntity)
+                alarmEntity.snooze = false
+                DataController(this).alarmDataUpdate(alarmEntity)
             }
 
             finish()

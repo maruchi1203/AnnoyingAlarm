@@ -1,6 +1,5 @@
 package lowblow.annoying_alarm.activity.wakeup_activity
 
-import android.app.KeyguardManager
 import android.content.Context
 import android.hardware.*
 import android.hardware.Sensor.TYPE_ACCELEROMETER
@@ -45,9 +44,9 @@ class AlarmWakeMosquitoActivity: AppCompatActivity(), SensorEventListener {
     //Sensor Calc
     private var count = 10
     private var lastUpdate = System.currentTimeMillis()
-    private var last_x = 0f
-    private var last_y = 0f
-    private var last_z = 0f
+    private var lastX = 0f
+    private var lastY = 0f
+    private var lastZ = 0f
 
     //AlarmEntity
     private lateinit var alarmEntity: AlarmEntity
@@ -69,6 +68,22 @@ class AlarmWakeMosquitoActivity: AppCompatActivity(), SensorEventListener {
     }
 
     override fun onBackPressed() {}
+
+    override fun onPause() {
+        super.onPause()
+
+        alarmEntity.snooze = true
+        DataController(this).alarmDataUpdate(alarmEntity)
+        finish()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        media.release()
+        vibrate.cancel()
+        sensorManager.unregisterListener(this)
+    }
 
     private fun initSensor() {
         sensorManager.registerListener(this,
@@ -133,7 +148,7 @@ class AlarmWakeMosquitoActivity: AppCompatActivity(), SensorEventListener {
                 val y = event.values[1]
                 val z = event.values[2]
 
-                val speed = abs(x + y + z - (last_x + last_y + last_z)) / diffTime * 10000
+                val speed = abs(x + y + z - (lastX + lastY + lastZ)) / diffTime * 10000
 
                 if (speed > SHAKE_THRESHOLD) {
                     binding.alarmWakeCustomCountTextView.text = count.toString()
@@ -145,9 +160,9 @@ class AlarmWakeMosquitoActivity: AppCompatActivity(), SensorEventListener {
                     }
                 }
 
-                last_x = x;
-                last_y = y;
-                last_z = z;
+                lastX = x;
+                lastY = y;
+                lastZ = z;
             }
 
         }
@@ -156,21 +171,17 @@ class AlarmWakeMosquitoActivity: AppCompatActivity(), SensorEventListener {
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
 
     private fun finishAlarm() {
-        media.release()
-        vibrate.cancel()
-        sensorManager.unregisterListener(this)
-
         if (alarmEntity.days == 0) {
             DataController(this).alarmDataDelete(alarmEntity)
         } else {
-            AlarmController(this).setAlarm(alarmEntity.id, alarmEntity)
+            alarmEntity.snooze = false
+            DataController(this).alarmDataUpdate(alarmEntity)
         }
 
         finish()
     }
 
     companion object {
-        const val SHAKE_THRESHOLD = 1200
+        const val SHAKE_THRESHOLD = 3000
     }
-
 }
