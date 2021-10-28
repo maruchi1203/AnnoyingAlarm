@@ -91,7 +91,7 @@ class AlarmListAdapter(
 
             //알람 시간 표시
             binding.alarmTimeTextView.text = if(entity.snooze) {
-                    "1분 내로 실행"
+                    "5분 내로 실행"
                 } else {
                     if (PreferenceManager(context.applicationContext).getBoolean("is24hour")) {
                         "%s %02d : %02d".format(
@@ -116,7 +116,7 @@ class AlarmListAdapter(
     @SuppressLint("SetTextI18n")
     fun bindDaysTextView(binding: ItemAlarmBinding, entity: AlarmEntity) {
         binding.alarmDaysTextView.text = if(entity.snooze) {
-            "종료하려면 좌측의 알람 버튼 클릭"
+            "종료하려면 알림창 끄기"
         } else {
             when (entity.days) {
                 0 -> {

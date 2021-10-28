@@ -6,6 +6,7 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.os.*
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -48,13 +49,16 @@ class AlarmWakeCustomActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
 
-        alarmEntity.snooze = true
-        DataController(this).alarmDataUpdate(alarmEntity)
         finish()
     }
 
     override fun onDestroy() {
         super.onDestroy()
+
+        alarmEntity.snooze = true
+        DataController(this).alarmDataUpdate(alarmEntity)
+
+        Toast.makeText(this, "제대로 일어나셨나요? 완전한 알람 종료를 위해 상단의 알림을 꺼주세요", Toast.LENGTH_LONG).show()
 
         media.release()
         vibrate.cancel()
@@ -74,7 +78,6 @@ class AlarmWakeCustomActivity : AppCompatActivity() {
                 WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or
                         WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
             )
-
     }
 
     private fun initSound() {
@@ -106,13 +109,6 @@ class AlarmWakeCustomActivity : AppCompatActivity() {
 
     private fun initExitButton() {
         binding.alarmWakeCustomCloseButton.setOnClickListener {
-            if (alarmEntity.days == 0) {
-                DataController(this).alarmDataDelete(alarmEntity)
-            } else {
-                alarmEntity.snooze = false
-                DataController(this).alarmDataUpdate(alarmEntity)
-            }
-
             finish()
         }
     }

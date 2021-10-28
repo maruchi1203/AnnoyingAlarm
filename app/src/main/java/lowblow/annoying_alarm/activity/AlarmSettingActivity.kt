@@ -36,8 +36,9 @@ class AlarmSettingActivity : AppCompatActivity() {
     //(BitMask) For alternating daysSave = List<boolean>
     private var daysSave: Int = 0
 
-    //Fragment variables
-    private var fragmentPos: Int = 0
+    //Fragment value
+    private var fragmentPos = 0
+    private var initializedSpinner = false
     private val fragmentManager = supportFragmentManager
 
     //PreferenceValue
@@ -151,15 +152,23 @@ class AlarmSettingActivity : AppCompatActivity() {
 
     private fun initAlarmSpinner() {
         //Initialize value for fragmentManager
+        alarmEntity?.let {
+            fragmentPos = it.alarmType.ordinal
+        }
         val spinnerItems = resources.getStringArray(R.array.alarm_theme)
         val spinnerAdapter =
             ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, spinnerItems)
+        val fragmentArray = arrayListOf(FragmentCustom(), FragmentMosquito(), FragmentSiren(), FragmentMessenger())
 
         alarmSpinner.adapter = spinnerAdapter
 
-        //Initialize fragment view
-        fragmentManager.beginTransaction()
-            .replace(R.id.selectedModeFragmentView, FragmentCustom(), "fragment")
+        alarmSpinner.setSelection(fragmentPos)
+
+        fragmentManager.beginTransaction().replace(
+            R.id.selectedModeFragmentView,
+            fragmentArray[fragmentPos],
+            "fragment"
+        )
             .commitAllowingStateLoss()
 
         alarmSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -169,58 +178,18 @@ class AlarmSettingActivity : AppCompatActivity() {
                 position: Int,
                 id: Long
             ) {
-                when (position) {
-                    0 -> {
-                        if (fragmentPos != 0) {
-                            fragmentManager.beginTransaction().replace(
-                                R.id.selectedModeFragmentView,
-                                FragmentCustom(),
-                                "fragment"
-                            )
-                                .commitAllowingStateLoss()
-                            fragmentPos = 0
-                        }
-                    }
-                    1 -> {
-                        if (fragmentPos != 1) {
-                            fragmentManager.beginTransaction().replace(
-                                R.id.selectedModeFragmentView,
-                                FragmentMosquito(),
-                                "fragment"
-                            )
-                                .commitAllowingStateLoss()
-                            fragmentPos = 1
-                        }
-                    }
-                    2 -> {
-                        if (fragmentPos != 2) {
-                            fragmentManager.beginTransaction().replace(
-                                R.id.selectedModeFragmentView,
-                                FragmentSiren(),
-                                "fragment"
-                            )
-                                .commitAllowingStateLoss()
-                            fragmentPos = 2
-                        }
-                    }
-                    3 -> {
-                        if (fragmentPos != 3) {
-                            fragmentManager.beginTransaction().replace(
-                                R.id.selectedModeFragmentView,
-                                FragmentMessenger(),
-                                "fragment"
-                            )
-                                .commitAllowingStateLoss()
-                            fragmentPos = 3
-                        }
-                    }
+                if (fragmentPos != position) {
+                    fragmentManager.beginTransaction().replace(
+                        R.id.selectedModeFragmentView,
+                        fragmentArray[position],
+                        "fragment"
+                    )
+                        .commitAllowingStateLoss()
+                    fragmentPos = position
                 }
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
-            }
-
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
     }
 

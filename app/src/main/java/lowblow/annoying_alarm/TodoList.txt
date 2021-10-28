@@ -38,3 +38,6 @@ AlarmListAdapter
  -alarm을 setExactAndAllowWhileIdle로 변경
  -권한 설정을 위한 PermissionActivity 추가
  -요일 버그 수정
+
+2021년 10월 28일
+ -
