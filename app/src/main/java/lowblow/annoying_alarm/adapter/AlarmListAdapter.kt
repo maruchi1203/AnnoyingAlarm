@@ -1,6 +1,7 @@
 package lowblow.annoying_alarm.adapter
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -8,6 +9,7 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -44,14 +46,26 @@ class AlarmListAdapter(
 
             //알람 작동 유무 표시
             imageView.setOnClickListener {
-                if(entity.snooze) {
+                if (entity.snooze) {
                     entity.snooze = false
+                    Toast.makeText(context, "알람이 해제되었습니다", Toast.LENGTH_SHORT).show()
+
+                    if (entity.days == 0) DataController(context).alarmDataDelete(entity)
+                    else DataController(context).alarmDataUpdate(entity)
+
+                    refresh()
                 } else {
                     if (entity.activated) {
-                        imageView.setColorFilter(Color.parseColor("#ffcccccc"), PorterDuff.Mode.SRC_IN)
+                        imageView.setColorFilter(
+                            Color.parseColor("#ffcccccc"),
+                            PorterDuff.Mode.SRC_IN
+                        )
                         entity.activated = false
                     } else {
-                        imageView.setColorFilter(Color.parseColor("#ff000000"), PorterDuff.Mode.SRC_IN)
+                        imageView.setColorFilter(
+                            Color.parseColor("#ff000000"),
+                            PorterDuff.Mode.SRC_IN
+                        )
                         entity.activated = true
                     }
                 }
@@ -60,62 +74,77 @@ class AlarmListAdapter(
 
             //알람 클릭시 업데이트 화면 작동
             binding.root.setOnClickListener {
-                val intent = Intent(context, AlarmSettingActivity::class.java).apply {
-                    putExtra("id", entity.id)
+                if (entity.snooze) {
+                    entity.snooze = false
+                    Toast.makeText(context, "알람이 해제되었습니다", Toast.LENGTH_SHORT).show()
+
+                    if (entity.days == 0) DataController(context).alarmDataDelete(entity)
+                    else DataController(context).alarmDataUpdate(entity)
+
+                    refresh()
+                } else {
+                    val intent = Intent(context, AlarmSettingActivity::class.java).apply {
+                        putExtra("id", entity.id)
+                    }
+                    context.startActivity(intent)
                 }
-                context.startActivity(intent)
             }
 
             //알람 길게 누를 시 삭제 화면 작동
-            binding.root.setOnLongClickListener {
-                val builder = AlertDialog.Builder(context)
-
-                builder.setTitle("알람 삭제").setMessage("알람을 삭제하시겠습니까?")
-
-                builder.setPositiveButton("좋아") { _, _ ->
-                    DataController(context).alarmDataDelete(entity)
-                    CoroutineScope(Dispatchers.Main).launch {
-                        this@AlarmListAdapter.submitList(DataController(context).getAllAlarmData())
-                    }
-                }
-
-                builder.setNegativeButton("싫어") { _, _ -> }
-
-                builder.create().show()
-
-                return@setOnLongClickListener true
-            }
+            initLongClickAlarmDelete(binding, entity)
 
             //알람 제목(메모) 표시
             binding.alarmTitleTextView.text = if (entity.memo == "") "알람" else entity.memo
 
             //알람 시간 표시
-            binding.alarmTimeTextView.text = if(entity.snooze) {
-                    "5분 내로 실행"
-                } else {
-                    if (PreferenceManager(context.applicationContext).getBoolean("is24hour")) {
-                        "%s %02d : %02d".format(
-                            (if (entity.hour < 12) "오전" else "오후"),
-                            (if (entity.hour % 12 == 0) 12 else entity.hour % 12),
-                            entity.minute
-                        )
-                    } else {
-                        "%02d : %02d".format(
-                            entity.hour,
-                            entity.minute
-                        )
-                    }
-                }
-
+            bindAlarmTimeTextView(binding, entity)
 
             //알람 반복 요일, 작동 시간 표시
             bindDaysTextView(binding, entity)
         }
     }
 
+    fun initLongClickAlarmDelete(binding: ItemAlarmBinding, entity: AlarmEntity) {
+        binding.root.setOnLongClickListener {
+            val builder = AlertDialog.Builder(context)
+
+            builder.setTitle("알람 삭제").setMessage("알람을 삭제하시겠습니까?")
+
+            builder.setPositiveButton("좋아") { _, _ ->
+                DataController(context).alarmDataDelete(entity)
+                refresh()
+            }
+
+            builder.setNegativeButton("싫어") { _, _ -> }
+
+            builder.create().show()
+
+            return@setOnLongClickListener true
+        }
+    }
+
+    fun bindAlarmTimeTextView(binding: ItemAlarmBinding, entity: AlarmEntity) {
+        binding.alarmTimeTextView.text = if (entity.snooze) {
+            "1분 내로 다시 실행"
+        } else {
+            if (PreferenceManager(context.applicationContext).getBoolean("is24hour")) {
+                "%s %02d : %02d".format(
+                    (if (entity.hour < 12) "오전" else "오후"),
+                    (if (entity.hour % 12 == 0) 12 else entity.hour % 12),
+                    entity.minute
+                )
+            } else {
+                "%02d : %02d".format(
+                    entity.hour,
+                    entity.minute
+                )
+            }
+        }
+    }
+
     @SuppressLint("SetTextI18n")
     fun bindDaysTextView(binding: ItemAlarmBinding, entity: AlarmEntity) {
-        binding.alarmDaysTextView.text = if(entity.snooze) {
+        binding.alarmDaysTextView.text = if (entity.snooze) {
             "종료하려면 알림창 끄기"
         } else {
             when (entity.days) {
@@ -152,6 +181,12 @@ class AlarmListAdapter(
                     tempDaysText
                 }
             }
+        }
+    }
+
+    private fun refresh() {
+        CoroutineScope(Dispatchers.Main).launch {
+            this@AlarmListAdapter.submitList(DataController(context).getAllAlarmData())
         }
     }
 

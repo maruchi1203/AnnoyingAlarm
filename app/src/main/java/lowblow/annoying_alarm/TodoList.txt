@@ -40,4 +40,3 @@ AlarmListAdapter
  -요일 버그 수정
 
 2021년 10월 28일
- -

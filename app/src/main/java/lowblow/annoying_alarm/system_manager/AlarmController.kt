@@ -85,7 +85,7 @@ class AlarmController(private val context: Context) {
     private fun setSnooze(id: Long) {
         val intent = Intent(context, AlarmReceiver::class.java)
 
-        val trigger = (SystemClock.elapsedRealtime() + 60 * 1000 * 5)
+        val trigger = (SystemClock.elapsedRealtime() + 60 * 1000)
 
         val pendingIntent = PendingIntent.getBroadcast(
             context.applicationContext,

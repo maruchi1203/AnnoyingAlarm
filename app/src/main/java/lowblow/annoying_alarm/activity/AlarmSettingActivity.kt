@@ -158,7 +158,8 @@ class AlarmSettingActivity : AppCompatActivity() {
         val spinnerItems = resources.getStringArray(R.array.alarm_theme)
         val spinnerAdapter =
             ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, spinnerItems)
-        val fragmentArray = arrayListOf(FragmentCustom(), FragmentMosquito(), FragmentSiren(), FragmentMessenger())
+        val fragmentArray =
+            arrayListOf(FragmentCustom(), FragmentMosquito(), FragmentSiren(), FragmentMessenger())
 
         alarmSpinner.adapter = spinnerAdapter
 
@@ -199,7 +200,6 @@ class AlarmSettingActivity : AppCompatActivity() {
             val data = (fragmentManager.findFragmentByTag("fragment") as FragmentParent).getData()
 
             if (entityId == 0.toLong()) {
-
                 DataController(this).alarmDataCreate(
                     AlarmEntity(
                         0,
@@ -217,7 +217,6 @@ class AlarmSettingActivity : AppCompatActivity() {
                 )
 
             } else {
-
                 DataController(this).alarmDataUpdate(
                     AlarmEntity(
                         entityId,
@@ -233,7 +232,6 @@ class AlarmSettingActivity : AppCompatActivity() {
                         false
                     )
                 )
-
             }
 
             finish()

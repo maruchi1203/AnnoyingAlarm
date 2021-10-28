@@ -72,14 +72,14 @@ class AlarmWakeMosquitoActivity: AppCompatActivity(), SensorEventListener {
     override fun onPause() {
         super.onPause()
 
+        alarmEntity.snooze = true
+        DataController(this).alarmDataUpdate(alarmEntity)
+
         finish()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-
-        alarmEntity.snooze = true
-        DataController(this).alarmDataUpdate(alarmEntity)
 
         media.release()
         vibrate.cancel()
@@ -125,14 +125,10 @@ class AlarmWakeMosquitoActivity: AppCompatActivity(), SensorEventListener {
         }
 
         if (alarmEntity.vibration) {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-                vibrate.vibrate(1000)
-            } else {
-                val timing = longArrayOf(0, 500)
-                val amplitudes = intArrayOf(0, 255)
+            val timing = longArrayOf(0, 500)
+            val amplitudes = intArrayOf(0, 255)
 
-                vibrate.vibrate(VibrationEffect.createWaveform(timing, amplitudes, 0))
-            }
+            vibrate.vibrate(VibrationEffect.createWaveform(timing, amplitudes, 0))
         }
 
     }
@@ -157,7 +153,7 @@ class AlarmWakeMosquitoActivity: AppCompatActivity(), SensorEventListener {
                     count -= 1
 
                     if(count <= 0) {
-                        finish()
+                        finishAlarm()
                     }
                 }
 
@@ -170,6 +166,17 @@ class AlarmWakeMosquitoActivity: AppCompatActivity(), SensorEventListener {
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
+
+    private fun finishAlarm() {
+        if (alarmEntity.days == 0) {
+            DataController(this).alarmDataDelete(alarmEntity)
+        } else {
+            alarmEntity.snooze = false
+            DataController(this).alarmDataUpdate(alarmEntity)
+        }
+
+        finish()
+    }
 
     companion object {
         const val SHAKE_THRESHOLD = 3000

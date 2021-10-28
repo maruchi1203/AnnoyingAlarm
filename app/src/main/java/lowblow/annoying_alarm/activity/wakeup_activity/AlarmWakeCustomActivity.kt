@@ -49,16 +49,14 @@ class AlarmWakeCustomActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
 
+        alarmEntity.snooze = true
+        DataController(this).alarmDataUpdate(alarmEntity)
+
         finish()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-
-        alarmEntity.snooze = true
-        DataController(this).alarmDataUpdate(alarmEntity)
-
-        Toast.makeText(this, "제대로 일어나셨나요? 완전한 알람 종료를 위해 상단의 알림을 꺼주세요", Toast.LENGTH_LONG).show()
 
         media.release()
         vibrate.cancel()
@@ -95,20 +93,23 @@ class AlarmWakeCustomActivity : AppCompatActivity() {
         }
 
         if (alarmEntity.vibration) {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-                vibrate.vibrate(1000)
-            } else {
-                val timing = longArrayOf(100, 100, 400)
-                val amplitudes = intArrayOf(0, 150, 255)
+            val timing = longArrayOf(100, 100, 400)
+            val amplitudes = intArrayOf(0, 150, 255)
 
-                vibrate.vibrate(VibrationEffect.createWaveform(timing, amplitudes, 0))
-            }
+            vibrate.vibrate(VibrationEffect.createWaveform(timing, amplitudes, 0))
         }
 
     }
 
     private fun initExitButton() {
         binding.alarmWakeCustomCloseButton.setOnClickListener {
+            if (alarmEntity.days == 0) {
+                DataController(this).alarmDataDelete(alarmEntity)
+            } else {
+                alarmEntity.snooze = false
+                DataController(this).alarmDataUpdate(alarmEntity)
+            }
+
             finish()
         }
     }
