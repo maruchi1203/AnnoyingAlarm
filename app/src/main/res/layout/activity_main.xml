@@ -1,30 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:layoutDescription="@xml/activity_main_scene"
     tools:context=".activity.MainActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/mainToolBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/alarmMenuButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:src="@drawable/ic_baseline_menu_24"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/black">
-    
-        <ImageButton
-            android:id="@+id/alarmMenuButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_menu_24"
-            android:background="@color/transparent"
-            app:tint="@color/white" />
-        
-    </androidx.appcompat.widget.Toolbar>
+        app:layout_constraintBottom_toBottomOf="@id/mainToolBar"
+        android:layout_marginStart="15dp"
+        app:tint="@color/white" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/alarmRecyclerView"
@@ -49,5 +53,72 @@
         app:tint="@color/white"
         tools:ignore="ContentDescription" />
 
+    <View
+        android:id="@+id/blindViewForPreferenceLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        android:background="#55000000" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/preferenceLinearLayout"
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Annoying Alarm"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/optionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="start|center"
+            android:padding="15dp"
+            android:text="옵션" />
+
+        <View
+            android:id="@+id/divideView"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="6dp"
+            android:background="@color/black" />
+
+        <LinearLayout
+            android:id="@+id/option24HourLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/option24HourTextView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableStart="@drawable/ic_baseline_alarm_24"
+                android:drawablePadding="10dp"
+                android:gravity="start|center"
+                android:padding="10dp"
+                android:text="24시간 표기" />
+
+            <androidx.appcompat.widget.AppCompatToggleButton
+                android:id="@+id/option24HourSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:paddingHorizontal="12dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

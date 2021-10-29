@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initAlarmButton()
+        initPreferenceMenu()
 
         binding.alarmRecyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
         binding.alarmRecyclerView.adapter = adapter
@@ -61,6 +62,9 @@ class MainActivity : AppCompatActivity() {
         if (checkPermission()) {
             startActivity(Intent(this, PermissionActivity::class.java))
         }
+    }
+
+    private fun initPreferenceMenu() {
     }
 
     private fun checkPermission(): Boolean {
