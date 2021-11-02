@@ -4,6 +4,7 @@ import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,14 +25,15 @@ class FragmentMosquito : FragmentParent() {
     private lateinit var alertBuilder: AlertDialog.Builder
 
     //Media player
-    private val media = MediaPlayer()
+    private lateinit var media: MediaPlayer
 
     //For initAlarmPlayTestButton
     private var isStopped: Boolean = true
 
     //For AlarmFragmentData
-    private lateinit var selectedUri : Uri
-    private var loudness: Float = 1.toFloat()
+    private var selectedTitle: String? = null
+    private var selectedUri: String? = null
+    private var volume: Float? = null
     private var isVibrate = true
 
     override fun onCreateView(
@@ -39,6 +41,7 @@ class FragmentMosquito : FragmentParent() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        media = MediaPlayer()
         initViews()
 
         return binding.root
@@ -51,53 +54,66 @@ class FragmentMosquito : FragmentParent() {
     }
 
     private fun initViews() {
+        initAlarmFragmentDataValue()
         initAlarmSoundChangeButton()
         initAlarmPlayTestButton()
         initVibrationSwitch()
         initSeekbar()
     }
 
+    private fun initAlarmFragmentDataValue() {
+        requireArguments().getSerializable("AlarmFragmentData")?.let {
+            val alarmFragmentData = it as AlarmFragmentData
+            if(alarmFragmentData.alarmType == AlarmType.FRAGMENT_MOSQUITO) {
+                selectedTitle = alarmFragmentData.alarmSoundTitle
+                selectedUri = alarmFragmentData.alarmSoundUri
+            }
+            isVibrate = alarmFragmentData.vibration
+            volume = alarmFragmentData.volume
+        }
+    }
+
     private fun initAlarmSoundChangeButton() {
-        selectedUri = Uri.parse(
-            String.format(
+        if(selectedUri == null) {
+            selectedUri = String.format(
                 "android.resource://%s/%s/%s",
                 requireContext().packageName,
                 "raw",
                 R.raw.mosquito1
             )
-        )
+            selectedTitle = "모기소리1"
+        }
 
         alertBuilder = AlertDialog.Builder(requireContext())
+
+        binding.alarmSoundChangeButton.text = selectedTitle
 
         binding.alarmSoundChangeButton.setOnClickListener {
             alertBuilder.setItems(R.array.mosquito_sound_type) { _, which ->
                 when (which) {
                     0 -> {
                         selectedUri =
-                            Uri.parse(
-                                String.format(
-                                    "android.resource://%s/%s/%s",
-                                    requireContext().packageName,
-                                    "raw",
-                                    R.raw.mosquito1
-                                )
+                            String.format(
+                                "android.resource://%s/%s/%s",
+                                requireContext().packageName,
+                                "raw",
+                                R.raw.mosquito1
                             )
-
-                        binding.alarmSoundChangeButton.text = "모기소리1"
+                        selectedTitle = "모기소리1"
                     }
                     1 -> {
                         selectedUri =
-                            Uri.parse(
-                                String.format(
-                                    "android.resource://%s/%s/%s",
-                                    requireContext().packageName,
-                                    "raw",
-                                    R.raw.mosquito2
-                                )
+                            String.format(
+                                "android.resource://%s/%s/%s",
+                                requireContext().packageName,
+                                "raw",
+                                R.raw.mosquito2
                             )
-                        binding.alarmSoundChangeButton.text = "모기소리2"
+                        selectedTitle = "모기소리2"
                     }
                 }
+
+                binding.alarmSoundChangeButton.text = selectedTitle
             }.create().show()
         }
     }
@@ -108,11 +124,11 @@ class FragmentMosquito : FragmentParent() {
             if (isStopped) {
                 media.setAudioAttributes(
                     AudioAttributes.Builder()
-                        .setUsage(AudioAttributes.USAGE_MEDIA)
+                        .setUsage(AudioAttributes.USAGE_ALARM)
                         .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                         .build()
                 )
-                media.setDataSource(requireContext(), selectedUri)
+                media.setDataSource(requireContext(), Uri.parse(selectedUri))
                 media.isLooping = true
                 media.prepare()
                 media.start()
@@ -129,6 +145,9 @@ class FragmentMosquito : FragmentParent() {
 
     private fun initVibrationSwitch() {
         val vibrationSwitch = binding.alarmVibrationSwitchCompat
+
+        vibrationSwitch.isChecked = !isVibrate
+
         vibrationSwitch.setOnCheckedChangeListener { _, isChecked ->
             isVibrate = !isChecked
             if (isVibrate) {
@@ -140,15 +159,20 @@ class FragmentMosquito : FragmentParent() {
     }
 
     private fun initSeekbar() {
-        binding.alarmSoundControlSeekBar.progress = 100
-        loudness = binding.alarmSoundControlSeekBar.progress.toFloat() / 100
-        media.setVolume(loudness, loudness)
+        if(volume == null) {
+            binding.alarmSoundControlSeekBar.progress = 100
+            volume = binding.alarmSoundControlSeekBar.progress.toFloat() / 100
+        } else {
+            binding.alarmSoundControlSeekBar.progress = (volume!! * 100).toInt()
+        }
+
+        media.setVolume(volume!!, volume!!)
 
         binding.alarmSoundControlSeekBar.setOnSeekBarChangeListener(object :
             SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                loudness = progress.toFloat() / 100
-                media.setVolume(loudness, loudness)
+                volume = progress.toFloat() / 100
+                media.setVolume(volume!!, volume!!)
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
@@ -162,9 +186,10 @@ class FragmentMosquito : FragmentParent() {
     override fun getData(): AlarmFragmentData {
 
         return AlarmFragmentData(
-            selectedUri.toString(),
+            selectedTitle,
+            selectedUri,
             isVibrate,
-            loudness,
+            volume!!,
             AlarmType.FRAGMENT_MOSQUITO
         )
 

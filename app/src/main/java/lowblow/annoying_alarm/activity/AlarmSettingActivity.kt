@@ -13,6 +13,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import lowblow.annoying_alarm.R
 import lowblow.annoying_alarm.data.alarm.AlarmEntity
+import lowblow.annoying_alarm.data.alarm.AlarmFragmentData
 import lowblow.annoying_alarm.databinding.AlarmSettingBinding
 import lowblow.annoying_alarm.fragment.*
 import lowblow.annoying_alarm.system_manager.DataController
@@ -38,13 +39,7 @@ class AlarmSettingActivity : AppCompatActivity() {
 
     //Fragment value
     private var fragmentPos = 0
-    private var initializedSpinner = false
     private val fragmentManager = supportFragmentManager
-
-    //PreferenceValue
-    private val is24Hour by lazy {
-        PreferenceManager(baseContext).getBoolean("is24hour")
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,6 +63,7 @@ class AlarmSettingActivity : AppCompatActivity() {
 
     private fun bindViews() {
         timePicker = binding.alarmTimePicker
+        timePicker.setIs24HourView(!PreferenceManager(this).getBoolean("24Hour"))
 
         for (i in 0 until binding.daysCheckBoxList.childCount) {
             daysCheckBox.add(i, binding.daysCheckBoxList.getChildAt(i) as CheckBox)
@@ -83,10 +79,15 @@ class AlarmSettingActivity : AppCompatActivity() {
         initDaysList()
         initAlarmSpinner()
         initSaveButton()
+        initMemoEditText()
     }
 
+
+
     private fun initTimePicker() {
-        timePicker.setIs24HourView(is24Hour)
+        timePicker.setIs24HourView(
+            PreferenceManager(this).getBoolean("24Hour")
+        )
 
         if (alarmEntity != null) {
             timePicker.hour = alarmEntity!!.hour
@@ -95,7 +96,16 @@ class AlarmSettingActivity : AppCompatActivity() {
     }
 
     private fun initDaysList() {
-        alarmEntity?.let { daysSave = it.days }
+        //알람을 업데이트하는 경우에는 원래 알람대로 요일 반복 설정
+        if (alarmEntity != null) {
+            daysSave = alarmEntity!!.days
+        }
+        //알람을 업데이트하지 않을 때에는 평일 반복으로 설정돼있는지 확인
+        else {
+            if (PreferenceManager(this).getBoolean("repeatAlarmForWeekDay"))
+                daysSave = 62
+        }
+
 
         for (i in 0 until daysCheckBox.count()) {
             val daysBit = (2.0).pow(i).toInt()
@@ -152,9 +162,21 @@ class AlarmSettingActivity : AppCompatActivity() {
 
     private fun initAlarmSpinner() {
         //Initialize value for fragmentManager
-        alarmEntity?.let {
-            fragmentPos = it.alarmType.ordinal
+        val bundle = Bundle()
+        alarmEntity?.let { entity ->
+            fragmentPos = entity.alarmType.ordinal
+            bundle.putSerializable(
+                "AlarmFragmentData",
+                AlarmFragmentData(
+                    entity.alarmSoundTitle,
+                    entity.alarmSoundUri,
+                    entity.vibration,
+                    entity.volume,
+                    entity.alarmType
+                )
+            )
         }
+
         val spinnerItems = resources.getStringArray(R.array.alarm_theme)
         val spinnerAdapter =
             ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, spinnerItems)
@@ -164,6 +186,10 @@ class AlarmSettingActivity : AppCompatActivity() {
         alarmSpinner.adapter = spinnerAdapter
 
         alarmSpinner.setSelection(fragmentPos)
+
+        //선택된 프래그먼트에 데이터 보내기
+        var selectedFragment = fragmentArray[fragmentPos]
+        selectedFragment.arguments = bundle
 
         fragmentManager.beginTransaction().replace(
             R.id.selectedModeFragmentView,
@@ -179,10 +205,12 @@ class AlarmSettingActivity : AppCompatActivity() {
                 position: Int,
                 id: Long
             ) {
+                selectedFragment = fragmentArray[position]
+                selectedFragment.arguments = bundle
                 if (fragmentPos != position) {
                     fragmentManager.beginTransaction().replace(
                         R.id.selectedModeFragmentView,
-                        fragmentArray[position],
+                        selectedFragment,
                         "fragment"
                     )
                         .commitAllowingStateLoss()
@@ -191,6 +219,12 @@ class AlarmSettingActivity : AppCompatActivity() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+    }
+
+    private fun initMemoEditText() {
+        alarmEntity?.let {
+            binding.alarmMemoEditText.setText(it.memo)
         }
     }
 
@@ -207,7 +241,8 @@ class AlarmSettingActivity : AppCompatActivity() {
                         timePicker.hour,
                         timePicker.minute,
                         daysSave,
-                        data.alarmUri,
+                        data.alarmSoundTitle,
+                        data.alarmSoundUri,
                         data.vibration,
                         data.volume,
                         binding.alarmMemoEditText.text.toString(),
@@ -224,7 +259,8 @@ class AlarmSettingActivity : AppCompatActivity() {
                         timePicker.hour,
                         timePicker.minute,
                         daysSave,
-                        data.alarmUri,
+                        data.alarmSoundTitle,
+                        data.alarmSoundUri,
                         data.vibration,
                         data.volume,
                         binding.alarmMemoEditText.text.toString(),

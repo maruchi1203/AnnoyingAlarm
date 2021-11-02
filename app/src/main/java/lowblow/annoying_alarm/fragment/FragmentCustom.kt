@@ -14,6 +14,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isGone
+import kotlinx.coroutines.selects.select
 import lowblow.annoying_alarm.activity.AlarmSoundActivity
 import lowblow.annoying_alarm.R
 import lowblow.annoying_alarm.data.AlarmType
@@ -25,7 +26,7 @@ class FragmentCustom : FragmentParent() {
     private lateinit var binding: FragmentCustomBinding
 
     //Media player
-    private val media = MediaPlayer()
+    private lateinit var media: MediaPlayer
 
     //For initMusicChangeButton
     private lateinit var resultListener: ActivityResultLauncher<Intent>
@@ -35,17 +36,20 @@ class FragmentCustom : FragmentParent() {
     private var isStopped: Boolean = true
 
     //For AlarmFragmentData
-    private var selectedUri: Uri? = null
-    private var volume: Float = 1.toFloat()
+    private var selectedTitle: String? = null
+    private var selectedUri: String? = null
+    private var volume: Float? = null
     private var isVibrate = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentCustomBinding.inflate(layoutInflater)
+        media = MediaPlayer()
 
+        initAlarmFragmentDataValue()
         initMusicChangeButton()
         initAlarmPlayTestButton()
         initVibrationSwitch()
@@ -60,6 +64,18 @@ class FragmentCustom : FragmentParent() {
         media.release()
     }
 
+    private fun initAlarmFragmentDataValue() {
+        requireArguments().getSerializable("AlarmFragmentData")?.let {
+            val alarmFragmentData = it as AlarmFragmentData
+            if(alarmFragmentData.alarmType == AlarmType.FRAGMENT_CUSTOM) {
+                selectedTitle = alarmFragmentData.alarmSoundTitle
+                selectedUri = alarmFragmentData.alarmSoundUri
+            }
+            isVibrate = alarmFragmentData.vibration
+            volume = alarmFragmentData.volume
+        }
+    }
+
     private fun initMusicChangeButton() {
         alertBuilder = AlertDialog.Builder(requireContext())
 
@@ -71,7 +87,8 @@ class FragmentCustom : FragmentParent() {
                     && result.data != null
                     && result.data!!.getStringExtra("selectedUri").toString() != "null"
                 ) {
-                    selectedUri = Uri.parse(result.data!!.getStringExtra("selectedUri"))
+                    selectedUri = result.data!!.getStringExtra("selectedUri")
+                    selectedTitle = result.data!!.getStringExtra("selectedTitle")
                     binding.alarmMusicChangeButton.text =
                         result.data!!.getStringExtra("selectedTitle")
                     controlSoundControlLayouts(true)
@@ -87,7 +104,7 @@ class FragmentCustom : FragmentParent() {
                 R.array.alarm_sound_type
             ) { _, which ->
                 when (which) {
-                    0-> {
+                    0 -> {
                         selectedUri = null
                         binding.alarmMusicChangeButton.text = "무음"
                         controlSoundControlLayouts(false)
@@ -102,6 +119,11 @@ class FragmentCustom : FragmentParent() {
                     }
                 }
             }.create().show()
+        }
+
+        if(selectedUri != null) {
+            binding.alarmMusicChangeButton.text = selectedTitle
+            controlSoundControlLayouts(true)
         }
     }
 
@@ -129,7 +151,7 @@ class FragmentCustom : FragmentParent() {
                             .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                             .build()
                     )
-                    media.setDataSource(requireContext(), selectedUri!!)
+                    media.setDataSource(requireContext(), Uri.parse(selectedUri!!))
                     media.isLooping = true
                     media.prepare()
                     media.start()
@@ -147,6 +169,9 @@ class FragmentCustom : FragmentParent() {
 
     private fun initVibrationSwitch() {
         val vibrationSwitch = binding.alarmVibrationSwitchCompat
+
+        vibrationSwitch.isChecked = !isVibrate
+
         vibrationSwitch.setOnCheckedChangeListener { _, isChecked ->
             isVibrate = !isChecked
             if (isVibrate) {
@@ -158,15 +183,20 @@ class FragmentCustom : FragmentParent() {
     }
 
     private fun initVolumeChangeSeekBar() {
-        binding.alarmSoundControlSeekBar.progress = 100
-        volume = binding.alarmSoundControlSeekBar.progress.toFloat() / 100
-        media.setVolume(volume, volume)
+        if(volume == null) {
+            binding.alarmSoundControlSeekBar.progress = 100
+            volume = binding.alarmSoundControlSeekBar.progress.toFloat() / 100
+        } else {
+            binding.alarmSoundControlSeekBar.progress = (volume!! * 100).toInt()
+        }
+
+        media.setVolume(volume!!, volume!!)
 
         binding.alarmSoundControlSeekBar.setOnSeekBarChangeListener(object :
             SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 volume = progress.toFloat() / 100
-                media.setVolume(volume, volume)
+                media.setVolume(volume!!, volume!!)
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
@@ -180,16 +210,12 @@ class FragmentCustom : FragmentParent() {
     override fun getData(): AlarmFragmentData {
 
         return AlarmFragmentData(
-            selectedUri?.toString(),
+            selectedTitle,
+            selectedUri,
             isVibrate,
-            volume,
+            volume!!,
             AlarmType.FRAGMENT_CUSTOM
         )
-
-    }
-
-    override fun setData(data: AlarmFragmentData) {
-
     }
 
     companion object {

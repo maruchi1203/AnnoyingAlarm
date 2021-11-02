@@ -1,6 +1,7 @@
 package lowblow.annoying_alarm.activity
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -16,6 +17,7 @@ import kotlinx.coroutines.launch
 import lowblow.annoying_alarm.adapter.AlarmListAdapter
 import lowblow.annoying_alarm.databinding.ActivityMainBinding
 import lowblow.annoying_alarm.system_manager.DataController
+import lowblow.annoying_alarm.system_manager.PreferenceManager
 import java.security.Permission
 import java.util.*
 
@@ -45,15 +47,13 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        CoroutineScope(Dispatchers.Main).launch {
-            adapter.submitList(DataController(this@MainActivity).getAllAlarmData())
-        }
+        adapter.refresh()
     }
 
     override fun onRestart() {
         super.onRestart()
 
-        if(checkPermission()) {
+        if (checkPermission()) {
             finish()
         }
     }
@@ -64,7 +64,27 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun initPreferenceMenu() {
+        val preferenceManager = PreferenceManager(this)
+        binding.option24HourSwitch.isChecked = preferenceManager.getBoolean("24Hour")
+        binding.option24HourSwitch.isChecked = preferenceManager.getBoolean("repeatAlarmForWeekDay")
+
+        binding.option24HourSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                preferenceManager.setBoolean("24Hour", true)
+            } else {
+                preferenceManager.setBoolean("24Hour", false)
+            }
+            adapter.notifyDataSetChanged()
+        }
+        binding.optionRepeatWeekdaySwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                preferenceManager.setBoolean("repeatAlarmForWeekDay", true)
+            } else {
+                preferenceManager.setBoolean("repeatAlarmForWeekDay", false)
+            }
+        }
     }
 
     private fun checkPermission(): Boolean {

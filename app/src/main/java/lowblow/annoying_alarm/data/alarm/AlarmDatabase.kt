@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(entities = [AlarmEntity::class], version = 1)
-abstract class AlarmDatabase: RoomDatabase() {
+abstract class AlarmDatabase : RoomDatabase() {
     abstract fun alarmDao(): AlarmDao
 
     companion object {
@@ -14,7 +14,7 @@ abstract class AlarmDatabase: RoomDatabase() {
 
         @Synchronized
         fun getInstance(context: Context): AlarmDatabase? {
-            if(alarmDatabase == null) {
+            if (alarmDatabase == null) {
                 synchronized(AlarmDatabase::class) {
                     alarmDatabase = Room.databaseBuilder(
                         context.applicationContext,

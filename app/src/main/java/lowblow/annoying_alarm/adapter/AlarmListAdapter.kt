@@ -127,15 +127,15 @@ class AlarmListAdapter(
         binding.alarmTimeTextView.text = if (entity.snooze) {
             "1분 내로 다시 실행"
         } else {
-            if (PreferenceManager(context.applicationContext).getBoolean("is24hour")) {
-                "%s %02d : %02d".format(
-                    (if (entity.hour < 12) "오전" else "오후"),
-                    (if (entity.hour % 12 == 0) 12 else entity.hour % 12),
+            if (PreferenceManager(context).getBoolean("24Hour")) {
+                "%02d : %02d".format(
+                    entity.hour,
                     entity.minute
                 )
             } else {
-                "%02d : %02d".format(
-                    entity.hour,
+                "%s %02d : %02d".format(
+                    (if (entity.hour < 12) "오전" else "오후"),
+                    (if (entity.hour % 12 == 0) 12 else entity.hour % 12),
                     entity.minute
                 )
             }
@@ -184,7 +184,7 @@ class AlarmListAdapter(
         }
     }
 
-    private fun refresh() {
+    fun refresh() {
         CoroutineScope(Dispatchers.Main).launch {
             this@AlarmListAdapter.submitList(DataController(context).getAllAlarmData())
         }

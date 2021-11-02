@@ -111,14 +111,14 @@ class AlarmWakeMosquitoActivity: AppCompatActivity(), SensorEventListener {
     }
 
     private fun initSound() {
-        if (alarmEntity.alarmUri != null) {
+        if (alarmEntity.alarmSoundUri != null) {
             media.setAudioAttributes(
                 AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_ALARM)
                     .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                     .build()
             )
-            media.setDataSource(this, Uri.parse(alarmEntity.alarmUri))
+            media.setDataSource(this, Uri.parse(alarmEntity.alarmSoundUri))
             media.isLooping = true
             media.prepare()
             media.start()

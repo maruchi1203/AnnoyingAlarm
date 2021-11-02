@@ -6,17 +6,13 @@ import lowblow.annoying_alarm.data.alarm.AlarmFragmentData
 
 abstract class FragmentParent : Fragment() {
 
-    open fun getData() : AlarmFragmentData {
+    open fun getData(): AlarmFragmentData {
         return AlarmFragmentData(
+            null,
             null,
             false,
             0.toFloat(),
             AlarmType.FRAGMENT_CUSTOM
         )
     }
-
-    open fun setData(data : AlarmFragmentData) {
-
-    }
-
 }

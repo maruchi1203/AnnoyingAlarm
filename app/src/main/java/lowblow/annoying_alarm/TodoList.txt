@@ -40,4 +40,10 @@ AlarmListAdapter
  -요일 버그 수정
 
 2021년 10월 28일
- -옵션 메뉴 추가 (24시간 표기 옵션 추가)
+ -옵션 메뉴 추가 ('알람 24시간 표기' 옵션 추가)
+
+2021년 11년 2일
+ -옵션 '알람 24시간 표기'가 RecyclerView에 적용됨
+ -옵션 메뉴 추가 ('평일 반복을 기본으로' 설정 추가)
+ -PreferenceManager 기능 완성
+ -알람타입 FragmentCustom에 업데이트 시 alarmSoundTitle 적용
