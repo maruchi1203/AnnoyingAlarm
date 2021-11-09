@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/militaryTitleTextView"
+        android:id="@+id/sirenTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="군인 체험"
+        android:text="사이렌 해제"
         android:textColor="@color/black"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -17,21 +18,115 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/militaryModeLinearLayout"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/alarmExplainView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
+        android:text="패드의 숫자를 잘 기억하세요"
+        android:textColor="@color/black"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/militaryTitleTextView">
+        app:layout_constraintTop_toBottomOf="@id/sirenTitleTextView" />
+
+    <TextView
+        android:id="@+id/alarmSoundTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:text="사이렌 소리와 진동"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:drawableStartCompat="@drawable/ic_baseline_music_note_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/alarmExplainView"
+        tools:ignore="HardcodedText" />
+
+    <LinearLayout
+        android:id="@+id/alarmSoundLinearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/alarmSoundTextView">
 
         <TextView
-            android:id="@+id/militaryModeTextView"
+            android:id="@+id/alarmSoundNameTextView"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:layout_weight="1"
-            />
+            android:background="@color/transparent"
+            android:ellipsize="end"
+            android:gravity="start|center"
+            android:maxLines="1"
+            android:paddingStart="16dp"
+            android:shadowColor="@color/black"
+            android:text="사이렌 소리"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/alarmPlayTestButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="12dp"
+            android:background="@color/transparent"
+            android:src="@drawable/ic_baseline_play_arrow_24" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/alarmVibrationSwitchCompat"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="14dp"
+            android:thumb="@drawable/ic_baseline_vibration_24" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/alarmNumPadTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:text="알람 해제"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:drawableStartCompat="@drawable/ic_baseline_music_note_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/alarmSoundLinearLayout"
+        tools:ignore="HardcodedText" />
+
+    <LinearLayout
+        android:id="@+id/alarmPadSizeLinearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/alarmNumPadTextView">
+
+        <Spinner
+            android:id="@+id/alarmAmountSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/alarmAmountTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start|center"
+            android:layout_weight="1"
+            android:text="* 입력해야할 숫자 수를 고르세요" />
+
 
     </LinearLayout>
 

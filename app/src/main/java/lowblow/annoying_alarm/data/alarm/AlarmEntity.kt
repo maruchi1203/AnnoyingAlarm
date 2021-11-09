@@ -13,11 +13,11 @@ data class AlarmEntity (
     @ColumnInfo(name = "hour") var hour: Int,
     @ColumnInfo(name = "minute") var minute: Int,
     @ColumnInfo(name = "days") var days: Int,
-    @ColumnInfo(name = "soundTitle") var alarmSoundTitle: String?,
-    @ColumnInfo(name = "uri") var alarmSoundUri: String?,
     @ColumnInfo(name = "vibration") var vibration: Boolean,
     @ColumnInfo(name = "volume") var volume: Float,
     @ColumnInfo(name = "memo") var memo: String,
     @ColumnInfo(name = "type") var alarmType: AlarmType,
-    @ColumnInfo(name = "snooze") var snooze: Boolean
+    @ColumnInfo(name = "snooze") var snooze: Boolean,
+    @ColumnInfo(name = "alarmUri") var alarmUri: String?,
+    @ColumnInfo(name = "temp") var temp: String?
 )

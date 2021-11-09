@@ -4,7 +4,6 @@ import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,6 +30,8 @@ class FragmentMosquito : FragmentParent() {
     private var isStopped: Boolean = true
 
     //For AlarmFragmentData
+    //AlarmFragmentData.temp1 == selectedTitle for custom fragment
+    //AlarmFragmentData.temp2 == selectedUri for custom fragment
     private var selectedTitle: String? = null
     private var selectedUri: String? = null
     private var volume: Float? = null
@@ -64,9 +65,9 @@ class FragmentMosquito : FragmentParent() {
     private fun initAlarmFragmentDataValue() {
         requireArguments().getSerializable("AlarmFragmentData")?.let {
             val alarmFragmentData = it as AlarmFragmentData
-            if(alarmFragmentData.alarmType == AlarmType.FRAGMENT_MOSQUITO) {
-                selectedTitle = alarmFragmentData.alarmSoundTitle
-                selectedUri = alarmFragmentData.alarmSoundUri
+            if (alarmFragmentData.alarmType == AlarmType.FRAGMENT_MOSQUITO) {
+                selectedTitle = alarmFragmentData.alarmUri
+                selectedUri = alarmFragmentData.temp
             }
             isVibrate = alarmFragmentData.vibration
             volume = alarmFragmentData.volume
@@ -74,7 +75,7 @@ class FragmentMosquito : FragmentParent() {
     }
 
     private fun initAlarmSoundChangeButton() {
-        if(selectedUri == null) {
+        if (selectedUri == null) {
             selectedUri = String.format(
                 "android.resource://%s/%s/%s",
                 requireContext().packageName,
@@ -159,7 +160,7 @@ class FragmentMosquito : FragmentParent() {
     }
 
     private fun initSeekbar() {
-        if(volume == null) {
+        if (volume == null) {
             binding.alarmSoundControlSeekBar.progress = 100
             volume = binding.alarmSoundControlSeekBar.progress.toFloat() / 100
         } else {
@@ -186,11 +187,11 @@ class FragmentMosquito : FragmentParent() {
     override fun getData(): AlarmFragmentData {
 
         return AlarmFragmentData(
-            selectedTitle,
-            selectedUri,
             isVibrate,
             volume!!,
-            AlarmType.FRAGMENT_MOSQUITO
+            AlarmType.FRAGMENT_MOSQUITO,
+            selectedTitle,
+            selectedUri
         )
 
     }

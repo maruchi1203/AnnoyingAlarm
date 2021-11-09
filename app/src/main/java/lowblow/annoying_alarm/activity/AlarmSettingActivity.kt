@@ -168,11 +168,11 @@ class AlarmSettingActivity : AppCompatActivity() {
             bundle.putSerializable(
                 "AlarmFragmentData",
                 AlarmFragmentData(
-                    entity.alarmSoundTitle,
-                    entity.alarmSoundUri,
                     entity.vibration,
                     entity.volume,
-                    entity.alarmType
+                    entity.alarmType,
+                    entity.alarmUri,
+                    entity.temp
                 )
             )
         }
@@ -241,13 +241,13 @@ class AlarmSettingActivity : AppCompatActivity() {
                         timePicker.hour,
                         timePicker.minute,
                         daysSave,
-                        data.alarmSoundTitle,
-                        data.alarmSoundUri,
                         data.vibration,
                         data.volume,
                         binding.alarmMemoEditText.text.toString(),
                         data.alarmType,
-                        false
+                        false,
+                        data.alarmUri,
+                        data.temp
                     )
                 )
 
@@ -259,13 +259,13 @@ class AlarmSettingActivity : AppCompatActivity() {
                         timePicker.hour,
                         timePicker.minute,
                         daysSave,
-                        data.alarmSoundTitle,
-                        data.alarmSoundUri,
                         data.vibration,
                         data.volume,
                         binding.alarmMemoEditText.text.toString(),
                         data.alarmType,
-                        false
+                        false,
+                        data.alarmUri,
+                        data.temp
                     )
                 )
             }

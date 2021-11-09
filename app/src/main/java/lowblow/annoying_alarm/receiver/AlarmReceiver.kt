@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import lowblow.annoying_alarm.activity.wakeup_activity.AlarmWakeCustomActivity
 import lowblow.annoying_alarm.activity.wakeup_activity.AlarmWakeMosquitoActivity
+import lowblow.annoying_alarm.activity.wakeup_activity.AlarmWakeSirenActivity
 import lowblow.annoying_alarm.data.AlarmType
 import kotlin.properties.Delegates
 
@@ -35,6 +36,10 @@ class AlarmReceiver : BroadcastReceiver() {
                 AlarmType.FRAGMENT_MOSQUITO.ordinal -> setClass(
                     context,
                     AlarmWakeMosquitoActivity::class.java
+                )
+                AlarmType.FRAGMENT_SIREN.ordinal -> setClass(
+                    context,
+                    AlarmWakeSirenActivity::class.java
                 )
                 else -> setClass(
                     context,

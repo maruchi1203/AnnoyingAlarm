@@ -1,54 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/alarmWakeCustomImageView"
+    <LinearLayout
+        android:id="@+id/alarmButtonGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_volume_up_128"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:tint="@color/black" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/button_unselected"
+                android:button="@color/transparent" />
+
+            <CheckBox
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/button_unselected"
+                android:button="@color/transparent" />
+
+            <CheckBox
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/button_unselected"
+                android:button="@color/transparent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/button_unselected"
+                android:button="@color/transparent" />
+
+            <CheckBox
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/button_unselected"
+                android:button="@color/transparent" />
+
+            <CheckBox
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/button_unselected"
+                android:button="@color/transparent" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/button_unselected"
+                android:button="@color/transparent" />
+
+            <CheckBox
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/button_unselected"
+                android:button="@color/transparent" />
+
+            <CheckBox
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/button_unselected"
+                android:button="@color/transparent" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/alarmWakeCustomTimeTextView"
+        android:id="@+id/alarm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="제대로 외웠나요?"
         android:textColor="@color/black"
-        android:textSize="32sp"
-        android:textStyle="bold"
+        android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/alarmWakeCustomImageView"
-        tools:text="07:30" />
-
-    <TextView
-        android:id="@+id/alarmWakeCustomMemoTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="알람 시키신 분?"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/alarmWakeCustomTimeTextView"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintTop_toBottomOf="@id/alarmButtonGroup" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/alarmWakeCustomCloseButton"
+        android:id="@+id/alarmWakeSirenReleaseButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="30dp"
         android:background="@color/black"
-        android:text="알람 종료"
+        android:orientation="vertical"
+        android:text="알람 해제"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"

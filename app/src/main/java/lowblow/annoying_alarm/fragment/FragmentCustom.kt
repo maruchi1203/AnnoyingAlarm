@@ -14,7 +14,6 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isGone
-import kotlinx.coroutines.selects.select
 import lowblow.annoying_alarm.activity.AlarmSoundActivity
 import lowblow.annoying_alarm.R
 import lowblow.annoying_alarm.data.AlarmType
@@ -23,7 +22,9 @@ import lowblow.annoying_alarm.databinding.FragmentCustomBinding
 
 class FragmentCustom : FragmentParent() {
 
-    private lateinit var binding: FragmentCustomBinding
+    private val binding by lazy {
+        FragmentCustomBinding.inflate(layoutInflater)
+    }
 
     //Media player
     private lateinit var media: MediaPlayer
@@ -36,6 +37,8 @@ class FragmentCustom : FragmentParent() {
     private var isStopped: Boolean = true
 
     //For AlarmFragmentData
+    //AlarmFragmentData.temp1 == selectedTitle for custom fragment
+    //AlarmFragmentData.temp2 == selectedUri for custom fragment
     private var selectedTitle: String? = null
     private var selectedUri: String? = null
     private var volume: Float? = null
@@ -46,7 +49,6 @@ class FragmentCustom : FragmentParent() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = FragmentCustomBinding.inflate(layoutInflater)
         media = MediaPlayer()
 
         initAlarmFragmentDataValue()
@@ -68,8 +70,9 @@ class FragmentCustom : FragmentParent() {
         requireArguments().getSerializable("AlarmFragmentData")?.let {
             val alarmFragmentData = it as AlarmFragmentData
             if(alarmFragmentData.alarmType == AlarmType.FRAGMENT_CUSTOM) {
-                selectedTitle = alarmFragmentData.alarmSoundTitle
-                selectedUri = alarmFragmentData.alarmSoundUri
+
+                selectedTitle = alarmFragmentData.alarmUri
+                selectedUri = alarmFragmentData.temp
             }
             isVibrate = alarmFragmentData.vibration
             volume = alarmFragmentData.volume
@@ -210,11 +213,11 @@ class FragmentCustom : FragmentParent() {
     override fun getData(): AlarmFragmentData {
 
         return AlarmFragmentData(
-            selectedTitle,
-            selectedUri,
             isVibrate,
             volume!!,
-            AlarmType.FRAGMENT_CUSTOM
+            AlarmType.FRAGMENT_CUSTOM,
+            selectedTitle,
+            selectedUri,
         )
     }
 

@@ -52,6 +52,15 @@
             android:showWhenLocked="true"
             android:turnScreenOn="true"
             tools:ignore="LockedOrientationActivity,UnusedAttribute" />
+        <activity
+            android:name="lowblow.annoying_alarm.activity.wakeup_activity.AlarmWakeSirenActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:showOnLockScreen="true"
+            android:showWhenLocked="true"
+            android:turnScreenOn="true"
+            tools:ignore="LockedOrientationActivity,UnusedAttribute" />
 
         <receiver android:name="lowblow.annoying_alarm.receiver.AlarmReceiver"
             android:exported="false">

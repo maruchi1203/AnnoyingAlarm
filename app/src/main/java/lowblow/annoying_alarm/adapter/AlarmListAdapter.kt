@@ -40,7 +40,7 @@ class AlarmListAdapter(
             binding.alarmItemModeTextView.text = when (entity.alarmType) {
                 AlarmType.FRAGMENT_CUSTOM -> "커스텀 알람"
                 AlarmType.FRAGMENT_MOSQUITO -> "모기 습격"
-                AlarmType.FRAGMENT_SIREN -> "사이렌"
+                AlarmType.FRAGMENT_SIREN -> "사이렌 해제"
                 AlarmType.FRAGMENT_MESSENGER -> "메신저"
             }
 

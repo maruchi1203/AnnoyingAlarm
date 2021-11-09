@@ -42,8 +42,14 @@ AlarmListAdapter
 2021년 10월 28일
  -옵션 메뉴 추가 ('알람 24시간 표기' 옵션 추가)
 
-2021년 11년 2일
+2021년 11월 2일
  -옵션 '알람 24시간 표기'가 RecyclerView에 적용됨
  -옵션 메뉴 추가 ('평일 반복을 기본으로' 설정 추가)
  -PreferenceManager 기능 완성
  -알람타입 FragmentCustom에 업데이트 시 alarmSoundTitle 적용
+
+2021년 11월 5일
+ -데이터베이스 타입 변경
+
+2021년 11월 9일
+ -Random 함수 이용한 Siren 모드 완성

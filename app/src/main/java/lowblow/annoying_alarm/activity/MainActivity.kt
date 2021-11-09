@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
     private fun initPreferenceMenu() {
         val preferenceManager = PreferenceManager(this)
         binding.option24HourSwitch.isChecked = preferenceManager.getBoolean("24Hour")
-        binding.option24HourSwitch.isChecked = preferenceManager.getBoolean("repeatAlarmForWeekDay")
+        binding.optionRepeatWeekdaySwitch.isChecked = preferenceManager.getBoolean("repeatAlarmForWeekDay")
 
         binding.option24HourSwitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {

@@ -6,14 +6,12 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.os.*
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import lowblow.annoying_alarm.data.alarm.AlarmEntity
 import lowblow.annoying_alarm.databinding.AlarmWakeCustomBinding
-import lowblow.annoying_alarm.system_manager.AlarmController
 import lowblow.annoying_alarm.system_manager.DataController
 
 class AlarmWakeCustomActivity : AppCompatActivity() {
@@ -22,7 +20,7 @@ class AlarmWakeCustomActivity : AppCompatActivity() {
         AlarmWakeCustomBinding.inflate(layoutInflater)
     }
 
-    private val media = MediaPlayer()
+    private lateinit var media: MediaPlayer
     private val vibrate by lazy {
         getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
     }
@@ -31,6 +29,8 @@ class AlarmWakeCustomActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        media = MediaPlayer()
 
         val id = intent.getLongExtra("id", 0)
 
@@ -79,14 +79,14 @@ class AlarmWakeCustomActivity : AppCompatActivity() {
     }
 
     private fun initSound() {
-        if (alarmEntity.alarmSoundUri != null) {
+        if (alarmEntity.temp != null) {
             media.setAudioAttributes(
                 AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_ALARM)
                     .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                     .build()
             )
-            media.setDataSource(this, Uri.parse(alarmEntity.alarmSoundUri))
+            media.setDataSource(this, Uri.parse(alarmEntity.temp))
             media.isLooping = true
             media.prepare()
             media.start()

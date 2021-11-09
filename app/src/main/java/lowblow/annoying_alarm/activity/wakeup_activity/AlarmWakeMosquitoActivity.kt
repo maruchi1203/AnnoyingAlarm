@@ -17,9 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import lowblow.annoying_alarm.data.alarm.AlarmEntity
 import lowblow.annoying_alarm.databinding.AlarmWakeMosquitoBinding
-import lowblow.annoying_alarm.system_manager.AlarmController
 import lowblow.annoying_alarm.system_manager.DataController
-import kotlin.math.abs
 
 class AlarmWakeMosquitoActivity: AppCompatActivity(), SensorEventListener {
 
@@ -27,7 +25,7 @@ class AlarmWakeMosquitoActivity: AppCompatActivity(), SensorEventListener {
         AlarmWakeMosquitoBinding.inflate(layoutInflater)
     }
 
-    private val media = MediaPlayer()
+    private lateinit var media : MediaPlayer
 
     private val vibrate by lazy {
         getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
@@ -54,6 +52,8 @@ class AlarmWakeMosquitoActivity: AppCompatActivity(), SensorEventListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        media = MediaPlayer()
 
         val id = intent.getLongExtra("id", 0)
 
@@ -111,14 +111,14 @@ class AlarmWakeMosquitoActivity: AppCompatActivity(), SensorEventListener {
     }
 
     private fun initSound() {
-        if (alarmEntity.alarmSoundUri != null) {
+        if (alarmEntity.temp != null) {
             media.setAudioAttributes(
                 AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_ALARM)
                     .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                     .build()
             )
-            media.setDataSource(this, Uri.parse(alarmEntity.alarmSoundUri))
+            media.setDataSource(this, Uri.parse(alarmEntity.temp))
             media.isLooping = true
             media.prepare()
             media.start()
@@ -145,7 +145,7 @@ class AlarmWakeMosquitoActivity: AppCompatActivity(), SensorEventListener {
                 val y = event.values[1]
                 val z = event.values[2]
 
-                val speed = abs(x + y + z - (lastX + lastY + lastZ)) / diffTime * 10000
+                val speed = (x + y + z - (lastX + lastY + lastZ)) / diffTime * 10000
 
                 if (speed > SHAKE_THRESHOLD) {
                     binding.alarmWakeCustomCountTextView.text = count.toString()

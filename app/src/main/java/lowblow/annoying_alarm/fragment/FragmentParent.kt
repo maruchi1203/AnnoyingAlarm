@@ -8,11 +8,11 @@ abstract class FragmentParent : Fragment() {
 
     open fun getData(): AlarmFragmentData {
         return AlarmFragmentData(
-            null,
-            null,
             false,
-            0.toFloat(),
-            AlarmType.FRAGMENT_CUSTOM
+            0F,
+            AlarmType.FRAGMENT_CUSTOM,
+            null,
+            null
         )
     }
 }

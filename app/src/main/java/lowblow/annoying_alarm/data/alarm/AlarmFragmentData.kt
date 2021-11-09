@@ -4,9 +4,9 @@ import lowblow.annoying_alarm.data.AlarmType
 import java.io.Serializable
 
 data class AlarmFragmentData(
-    val alarmSoundTitle: String?,
-    val alarmSoundUri: String?,
     val vibration: Boolean,
     val volume: Float,
-    val alarmType: AlarmType
+    val alarmType: AlarmType,
+    val alarmUri: String?,
+    val temp: String?
 ) : Serializable
