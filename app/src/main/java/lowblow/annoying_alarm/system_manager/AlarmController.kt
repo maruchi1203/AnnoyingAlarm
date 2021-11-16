@@ -23,7 +23,7 @@ class AlarmController(private val context: Context) {
     fun setAlarmState(id: Long, alarmEntity: AlarmEntity) {
         if(alarmEntity.activated) {
             if (alarmEntity.snooze)
-                setSnooze(id)
+                setSnooze(id, alarmEntity)
             else
                 setNext(id, alarmEntity)
         } else {
@@ -82,13 +82,14 @@ class AlarmController(private val context: Context) {
     }
 
     @SuppressLint("UnspecifiedImmutableFlag")
-    private fun setSnooze(id: Long) {
+    private fun setSnooze(id: Long, alarmEntity: AlarmEntity) {
         val intent = Intent(context, AlarmReceiver::class.java)
+        intent.putExtra("id", id)
+        intent.putExtra("alarmType", alarmEntity.alarmType.ordinal)
 
         val trigger = (SystemClock.elapsedRealtime() + 60 * 1000)
 
-        val pendingIntent = PendingIntent.getBroadcast(
-            context.applicationContext,
+        val pendingIntent = PendingIntent.getBroadcast(            context.applicationContext,
             id.toInt(),
             intent,
             PendingIntent.FLAG_UPDATE_CURRENT

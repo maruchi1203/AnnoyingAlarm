@@ -66,8 +66,8 @@ class FragmentMosquito : FragmentParent() {
         requireArguments().getSerializable("AlarmFragmentData")?.let {
             val alarmFragmentData = it as AlarmFragmentData
             if (alarmFragmentData.alarmType == AlarmType.FRAGMENT_MOSQUITO) {
-                selectedTitle = alarmFragmentData.alarmUri
-                selectedUri = alarmFragmentData.temp
+                selectedTitle = alarmFragmentData.temp
+                selectedUri = alarmFragmentData.alarmUri
             }
             isVibrate = alarmFragmentData.vibration
             volume = alarmFragmentData.volume

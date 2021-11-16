@@ -16,7 +16,8 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp">
 
             <CheckBox
                 android:layout_width="80dp"
@@ -27,6 +28,7 @@
             <CheckBox
                 android:layout_width="80dp"
                 android:layout_height="80dp"
+                android:layout_marginHorizontal="5dp"
                 android:background="@drawable/button_unselected"
                 android:button="@color/transparent" />
 
@@ -35,6 +37,33 @@
                 android:layout_height="80dp"
                 android:background="@drawable/button_unselected"
                 android:button="@color/transparent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp">
+
+            <CheckBox
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/button_unselected"
+                android:button="@color/transparent" />
+
+            <CheckBox
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginHorizontal="5dp"
+                android:background="@drawable/button_unselected"
+                android:button="@color/transparent" />
+
+            <CheckBox
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/button_unselected"
+                android:button="@color/transparent" />
+
 
         </LinearLayout>
 
@@ -51,31 +80,7 @@
             <CheckBox
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:background="@drawable/button_unselected"
-                android:button="@color/transparent" />
-
-            <CheckBox
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:background="@drawable/button_unselected"
-                android:button="@color/transparent" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <CheckBox
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:background="@drawable/button_unselected"
-                android:button="@color/transparent" />
-
-            <CheckBox
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_marginHorizontal="5dp"
                 android:background="@drawable/button_unselected"
                 android:button="@color/transparent" />
 
@@ -91,7 +96,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/alarm"
+        android:id="@+id/alarmDescTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"

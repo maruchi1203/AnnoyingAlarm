@@ -10,12 +10,80 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="O톡 메신저 모드"
+        android:text="문자 폭탄"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/alarmExplainView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="깰 때까지 문자 보냅니다"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/messengerTitleTextView" />
+
+    <TextView
+        android:id="@+id/alarmSoundTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:text="알람음과 진동"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:drawableStartCompat="@drawable/ic_baseline_music_note_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/alarmExplainView" />
+
+    <LinearLayout
+        android:id="@+id/alarmSoundLinearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/alarmSoundTextView">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/alarmMusicChangeButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:ellipsize="end"
+            android:gravity="start|center"
+            android:maxLines="1"
+            android:paddingStart="16dp"
+            android:shadowColor="@color/black"
+            android:text="벨소리"
+            tools:ignore="RtlSymmetry" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/alarmPlayTestButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="12dp"
+            android:background="@color/transparent"
+            android:src="@drawable/ic_baseline_play_arrow_24" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/alarmVibrationSwitchCompat"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="14dp"
+            android:thumb="@drawable/ic_baseline_vibration_24" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

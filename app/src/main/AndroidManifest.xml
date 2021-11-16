@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
 
     <application
         android:allowBackup="false"
@@ -20,7 +21,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Motivated"
         tools:ignore="AllowBackup">
-
 
 
         <activity android:name="lowblow.annoying_alarm.activity.MainActivity">
@@ -61,8 +61,18 @@
             android:showWhenLocked="true"
             android:turnScreenOn="true"
             tools:ignore="LockedOrientationActivity,UnusedAttribute" />
+        <activity
+            android:name="lowblow.annoying_alarm.activity.wakeup_activity.AlarmWakeMessengerActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:showOnLockScreen="true"
+            android:showWhenLocked="true"
+            android:turnScreenOn="true"
+            tools:ignore="LockedOrientationActivity,UnusedAttribute" />
 
-        <receiver android:name="lowblow.annoying_alarm.receiver.AlarmReceiver"
+        <receiver
+            android:name="lowblow.annoying_alarm.receiver.AlarmReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.sec" />

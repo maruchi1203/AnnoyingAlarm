@@ -32,7 +32,7 @@ class FragmentSiren : FragmentParent() {
 
     //For AlarmFragmentData
     private var alarmUri: String? = null;
-    private var amount: Int = 4
+    private var amount: Int = 1
     private var isVibrate = true
 
     override fun onCreateView(

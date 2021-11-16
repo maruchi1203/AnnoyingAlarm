@@ -18,6 +18,7 @@ import kotlinx.coroutines.launch
 import lowblow.annoying_alarm.data.alarm.AlarmEntity
 import lowblow.annoying_alarm.databinding.AlarmWakeMosquitoBinding
 import lowblow.annoying_alarm.system_manager.DataController
+import kotlin.math.abs
 
 class AlarmWakeMosquitoActivity: AppCompatActivity(), SensorEventListener {
 
@@ -145,7 +146,7 @@ class AlarmWakeMosquitoActivity: AppCompatActivity(), SensorEventListener {
                 val y = event.values[1]
                 val z = event.values[2]
 
-                val speed = (x + y + z - (lastX + lastY + lastZ)) / diffTime * 10000
+                val speed = (x + y + z - abs(lastX + lastY + lastZ)) / diffTime * 10000
 
                 if (speed > SHAKE_THRESHOLD) {
                     binding.alarmWakeCustomCountTextView.text = count.toString()

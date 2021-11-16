@@ -179,8 +179,11 @@ class AlarmWakeSirenActivity : AppCompatActivity() {
 
             for (i in 0 until buttonList.size) {
                 buttonList[i].isClickable = true
+                buttonList[i].isChecked = false
                 buttonList[i].background = this.getDrawable(R.drawable.button_unselected)
             }
+
+            binding.alarmDescTextView.text = "똑같은 자판을 눌러주세요"
 
         } else {
             for (i in 0 until buttonList.size) {
@@ -191,6 +194,8 @@ class AlarmWakeSirenActivity : AppCompatActivity() {
                     this.getDrawable(R.drawable.button_unselected)
                 }
             }
+
+            binding.alarmDescTextView.text = "제대로 외우셨나요?"
         }
     }
 

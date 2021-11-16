@@ -195,8 +195,7 @@ class AlarmSettingActivity : AppCompatActivity() {
             R.id.selectedModeFragmentView,
             fragmentArray[fragmentPos],
             "fragment"
-        )
-            .commitAllowingStateLoss()
+        ).commitAllowingStateLoss()
 
         alarmSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(

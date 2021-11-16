@@ -1,5 +1,6 @@
 package lowblow.annoying_alarm.fragment
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.media.AudioAttributes
 import android.media.MediaPlayer
@@ -37,8 +38,7 @@ class FragmentCustom : FragmentParent() {
     private var isStopped: Boolean = true
 
     //For AlarmFragmentData
-    //AlarmFragmentData.temp1 == selectedTitle for custom fragment
-    //AlarmFragmentData.temp2 == selectedUri for custom fragment
+    //AlarmFragmentData.temp == selectedTitle for custom fragment
     private var selectedTitle: String? = null
     private var selectedUri: String? = null
     private var volume: Float? = null
@@ -69,16 +69,16 @@ class FragmentCustom : FragmentParent() {
     private fun initAlarmFragmentDataValue() {
         requireArguments().getSerializable("AlarmFragmentData")?.let {
             val alarmFragmentData = it as AlarmFragmentData
-            if(alarmFragmentData.alarmType == AlarmType.FRAGMENT_CUSTOM) {
-
-                selectedTitle = alarmFragmentData.alarmUri
-                selectedUri = alarmFragmentData.temp
+            if (alarmFragmentData.alarmType == AlarmType.FRAGMENT_CUSTOM) {
+                selectedTitle = alarmFragmentData.temp
+                selectedUri = alarmFragmentData.alarmUri
             }
             isVibrate = alarmFragmentData.vibration
             volume = alarmFragmentData.volume
         }
     }
 
+    @SuppressLint("InlinedApi")
     private fun initMusicChangeButton() {
         alertBuilder = AlertDialog.Builder(requireContext())
 
@@ -124,7 +124,7 @@ class FragmentCustom : FragmentParent() {
             }.create().show()
         }
 
-        if(selectedUri != null) {
+        if (selectedUri != null) {
             binding.alarmMusicChangeButton.text = selectedTitle
             controlSoundControlLayouts(true)
         }
@@ -186,7 +186,7 @@ class FragmentCustom : FragmentParent() {
     }
 
     private fun initVolumeChangeSeekBar() {
-        if(volume == null) {
+        if (volume == null) {
             binding.alarmSoundControlSeekBar.progress = 100
             volume = binding.alarmSoundControlSeekBar.progress.toFloat() / 100
         } else {

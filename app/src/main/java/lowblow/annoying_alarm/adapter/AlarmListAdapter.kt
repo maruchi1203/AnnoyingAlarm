@@ -33,6 +33,7 @@ class AlarmListAdapter(
     inner class ViewHolder(private val binding: ItemAlarmBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("NotifyDataSetChanged")
         fun bind(entity: AlarmEntity) {
             val imageView = binding.alarmImageView
 
@@ -41,7 +42,7 @@ class AlarmListAdapter(
                 AlarmType.FRAGMENT_CUSTOM -> "커스텀 알람"
                 AlarmType.FRAGMENT_MOSQUITO -> "모기 습격"
                 AlarmType.FRAGMENT_SIREN -> "사이렌 해제"
-                AlarmType.FRAGMENT_MESSENGER -> "메신저"
+                AlarmType.FRAGMENT_MESSENGER -> "문자 폭탄"
             }
 
             //알람 작동 유무 표시
@@ -68,8 +69,8 @@ class AlarmListAdapter(
                         )
                         entity.activated = true
                     }
+                    DataController(context).alarmDataUpdate(entity)
                 }
-                DataController(context).alarmDataUpdate(entity)
             }
 
             //알람 클릭시 업데이트 화면 작동

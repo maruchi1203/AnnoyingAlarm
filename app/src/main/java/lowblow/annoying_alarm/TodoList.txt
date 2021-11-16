@@ -53,3 +53,11 @@ AlarmListAdapter
 
 2021년 11월 9일
  -Random 함수 이용한 Siren 모드 완성
+
+2021년 11월 10일
+ -AlarmListAdapter 'onPause시 snooze 해제' 버그 수정
+
+2021년 11월 16일
+ -Keyguard 해제를 이용한 Message 모드 완성
+ -전체적인 기능 완성
+ -이후 버그 수정

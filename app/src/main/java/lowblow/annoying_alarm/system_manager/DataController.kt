@@ -54,7 +54,7 @@ class DataController(val context: Context) {
 
     fun alarmDataDelete(alarmEntity: AlarmEntity) {
 
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(Dispatchers.Main).launch {
             database!!.alarmDao().deleteAlarm(alarmEntity)
             alarmEntity.activated = false
             AlarmController(context).setAlarmState(alarmEntity.id, alarmEntity)

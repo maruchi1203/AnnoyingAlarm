@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         initAlarmButton()
         initPreferenceMenu()
 
-        binding.alarmRecyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
+        binding.alarmRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.alarmRecyclerView.adapter = adapter
     }
 

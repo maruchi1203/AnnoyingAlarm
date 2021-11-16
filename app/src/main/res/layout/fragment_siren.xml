@@ -103,7 +103,7 @@
         tools:ignore="HardcodedText" />
 
     <LinearLayout
-        android:id="@+id/alarmPadSizeLinearLayout"
+        android:id="@+id/alarmPadAmountLinearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
@@ -125,7 +125,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="start|center"
             android:layout_weight="1"
-            android:text="* 입력해야할 숫자 수를 고르세요" />
+            android:text="* 기억해야할 패드의 수를 고르세요" />
 
 
     </LinearLayout>

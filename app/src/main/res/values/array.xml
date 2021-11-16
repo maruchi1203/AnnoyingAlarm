@@ -4,7 +4,7 @@
         <item>커스텀 알람</item>
         <item>모기 습격</item>
         <item>사이렌 해제</item>
-        <item>O톡 메세지 폭탄</item>
+        <item>문자 폭탄</item>
     </string-array>
 
     <string-array name="alarm_sound_type">

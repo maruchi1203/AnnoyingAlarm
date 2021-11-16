@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@color/transparent">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/messageTextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:drawablePadding="12dp"
+        android:gravity="start|center"
+        android:paddingHorizontal="12dp"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        tools:drawableStartCompat="@drawable/ic_baseline_message_36"
+        app:drawableTint="@color/black"
+        tools:ignore="RtlSymmetry"
+        tools:text="얽" />
+
+</LinearLayout>

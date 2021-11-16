@@ -1,18 +1,16 @@
 package lowblow.annoying_alarm.receiver
 
-import android.app.NotificationManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import lowblow.annoying_alarm.activity.wakeup_activity.AlarmWakeCustomActivity
+import lowblow.annoying_alarm.activity.wakeup_activity.AlarmWakeMessengerActivity
 import lowblow.annoying_alarm.activity.wakeup_activity.AlarmWakeMosquitoActivity
 import lowblow.annoying_alarm.activity.wakeup_activity.AlarmWakeSirenActivity
 import lowblow.annoying_alarm.data.AlarmType
 import kotlin.properties.Delegates
 
 class AlarmReceiver : BroadcastReceiver() {
-
-    private lateinit var notificationManager: NotificationManager
 
     private var id by Delegates.notNull<Long>()
     private var alarmType by Delegates.notNull<Int>()
@@ -40,6 +38,10 @@ class AlarmReceiver : BroadcastReceiver() {
                 AlarmType.FRAGMENT_SIREN.ordinal -> setClass(
                     context,
                     AlarmWakeSirenActivity::class.java
+                )
+                AlarmType.FRAGMENT_MESSENGER.ordinal -> setClass(
+                    context,
+                    AlarmWakeMessengerActivity::class.java
                 )
                 else -> setClass(
                     context,

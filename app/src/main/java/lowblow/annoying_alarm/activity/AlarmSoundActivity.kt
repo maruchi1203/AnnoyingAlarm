@@ -80,6 +80,7 @@ class AlarmSoundActivity : AppCompatActivity() {
         //IS_RINGTONE, IS_ALARM.... << These are compared with INTEGER
         val selection = "$soundType != 0"
 
+
         val cursor = contentResolver.query(
             uriExternal,
             projection,
